@@ -52,17 +52,25 @@ def get_name_pass(session_id: str):
     coverage guarantee, the current transcript fingerprint, the category vocabulary,
     and the existing key as a cross-check seed (the prior pass, assumed incomplete)."""
     try:
-        get_session_dir(current_app.config["SESSIONS_DIR"], session_id)
+        session_dir = get_session_dir(current_app.config["SESSIONS_DIR"], session_id)
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
     except FileNotFoundError as e:
         return jsonify({"error": str(e)}), 404
+    if not (session_dir / "transcript-rich.json").exists():
+        return jsonify({"error": f"No transcript for session: {session_id}"}), 404
 
     seed = name_truth.load_notes(session_id)
     try:
-        groups, m9_meta = name_truth.collect_flags(session_id, seed.get("_watch", []))
-    except FileNotFoundError:
-        return jsonify({"error": f"No transcript for session: {session_id}"}), 404
+        groups, m9_meta = name_truth.collect_flags(session_id, seed.get("_watch", []),
+                                                   roster_path=current_app.config["ROSTER_PATH"])
+    except FileNotFoundError as e:
+        # The transcript exists — checked above via SESSIONS_DIR, which every supported
+        # wiring keeps aligned with name_truth.ROOT (tests monkeypatch ROOT to tmp) — so
+        # this is a missing engine input: the frozen M9a's roster fail-loud, whose message
+        # names the roster and the fix. Surface it as the server-side gap it is; don't
+        # relabel it (TMAS-108).
+        return jsonify({"error": str(e)}), 500
 
     # Serialize into cards. NB: collect_flags returns Python sets (surface, detectors,
     # source, m9_meta['coded']) — sort them to lists or jsonify raises.

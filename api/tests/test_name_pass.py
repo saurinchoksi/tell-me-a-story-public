@@ -35,11 +35,24 @@ TRANSCRIPT = {
 }
 
 
-@pytest.fixture
-def client(tmp_path, monkeypatch):
+# A synthetic roster (example-twin names, per data/name_roster.example.json): the frozen
+# M9a detector fail-louds without a roster FILE, so a hermetic run must write one — but
+# its names are phonetically disjoint from the transcript's, so no result depends on it.
+ROSTER = {
+    "people": [
+        {"id": "child", "canonical": "Marta", "role": "child", "circle": "family", "nicknames": ["Kiki"]},
+        {"id": "parent", "canonical": "Kiran", "role": "parent", "circle": "family"},
+    ],
+    "aliases": [{"token": "bemarta", "person_id": "child"}],
+}
+
+
+def _make_app(tmp_path, monkeypatch, write_roster=True):
     sessions = tmp_path / "sessions"
     (sessions / SID).mkdir(parents=True)
     (sessions / SID / "transcript-rich.json").write_text(json.dumps(TRANSCRIPT))
+    if write_roster:
+        (tmp_path / "roster.json").write_text(json.dumps(ROSTER))
 
     app = create_app(
         sessions_dir=sessions,
@@ -53,8 +66,12 @@ def client(tmp_path, monkeypatch):
     # engine at tmp so its session reads and its key writes stay in the temp dir.
     import name_truth
     monkeypatch.setattr(name_truth, "ROOT", tmp_path)
+    return app
 
-    with app.test_client() as c:
+
+@pytest.fixture
+def client(tmp_path, monkeypatch):
+    with _make_app(tmp_path, monkeypatch).test_client() as c:
         yield c
 
 
@@ -123,6 +140,19 @@ def test_post_rejects_bad_body(client):
 def test_bad_session_id_and_missing_session(client):
     assert client.get("/api/sessions/not-an-id/name-pass").status_code == 400
     assert client.get("/api/sessions/29990101-000000/name-pass").status_code == 404
+
+
+def test_missing_roster_names_the_roster_not_the_transcript(tmp_path, monkeypatch):
+    """A fresh clone/export has this session's transcript but no roster, so the frozen
+    M9a fail-louds. The GET must surface THAT message — it names the roster and the fix —
+    never the old "No transcript" mislabel that pointed a new runner at the wrong file."""
+    app = _make_app(tmp_path, monkeypatch, write_roster=False)
+    with app.test_client() as c:
+        resp = c.get(f"/api/sessions/{SID}/name-pass")
+    assert resp.status_code == 500
+    err = resp.get_json()["error"]
+    assert "roster" in err.lower()
+    assert "transcript" not in err.lower()
 
 
 # --- Phase 2: Opus suggestions + the heard-gate commit ---

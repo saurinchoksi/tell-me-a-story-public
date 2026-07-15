@@ -316,18 +316,23 @@ def detect_phrases(segments, single_cands, min_count=2, dominance=0.5):
     return out
 
 
-def collect_flags(sid, watch=()):
+def collect_flags(sid, watch=(), roster_path=None):
     """Per-spelling records with every occurrence (timed, with its sentence),
     grouped: each M9b cluster, the roster names M9b never clustered, then EVERY
     other proper name no detector flags (swept from the transcript + manual
-    `watch`) so a silent substitution onto a valid name can't hide from review."""
+    `watch`) so a silent substitution onto a valid name can't hide from review.
+
+    `roster_path` reroutes every roster read in here (M9a, M9b, the lowercase-sound
+    net) — the constructors already accept it, and None means each one's default
+    (data/name_roster.json). The API route passes its app's ROSTER_PATH through,
+    so tests and the publish export never need the real gitignored roster."""
     sd = ROOT / "sessions" / sid
     rich = json.loads((sd / "transcript-rich.json").read_text())
     seg = {s["id"]: s for s in rich["segments"]}
     m9_segs = m9_coded_segments(sd, rich["segments"])  # human's hand-coded M9 segments
 
-    m9a = FamilyNameDetector().run(sd)
-    m9b_detector = NameConsistencyDetector()
+    m9a = FamilyNameDetector(roster_path=roster_path).run(sd)
+    m9b_detector = NameConsistencyDetector(roster_path=roster_path)
     m9b = m9b_detector.run(sd)  # code-only
 
     rec = {}
@@ -384,7 +389,7 @@ def collect_flags(sid, watch=()):
     name_source_codes = set()
     for nm in cap_sweep:
         name_source_codes |= codes(nm)
-    name_source_codes |= RosterMatcher()._roster_codes
+    name_source_codes |= RosterMatcher(roster_path)._roster_codes
     for canon in home_canon.canonical_forms().values():
         name_source_codes |= codes(clean(canon))  # clean() first — transcript tokens are cleaned too
     lowercase_net = set()

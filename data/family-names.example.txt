@@ -3,8 +3,13 @@
 # publishing aborts on any hit; a missing or empty pattern file also aborts (fail loud).
 # One term per line; matched case-insensitive, whole-word, as a fixed string
 # (a multi-word line matches as an exact phrase). '#' lines and blanks are ignored.
-# Tips: include nicknames and known transcription garbles; skip variants that are
-# common English words (false-positive magnets); phrases catch full-name pairings.
+# Tips: include known transcription garbles; phrases catch full-name pairings;
+# keep every line lowercase (BSD grep -i only folds ASCII, so non-ASCII names
+# must match byte-for-byte).
+# Coverage is ENFORCED: publish.sh aborts unless every roster canonical, nickname,
+# and alias token appears here. A variant that is itself a common English word
+# (a false-positive magnet) opts out explicitly — a '# unscannable: <name>' line
+# satisfies the coverage guard without becoming a scan pattern.
 marta
 martie
 marthie

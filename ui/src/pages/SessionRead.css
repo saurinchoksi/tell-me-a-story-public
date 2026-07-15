@@ -1,0 +1,167 @@
+/* --- Session reading view (TMAS-71) — the parent-facing default click-through.
+   Desktop-only, warm editorial tokens, deliberately plainer than the Validator. --- */
+
+.session-read {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4) var(--space-8);
+}
+
+.session-read-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.session-read-back,
+.session-read-validator-link {
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.session-read-back:hover,
+.session-read-validator-link:hover {
+  text-decoration: underline;
+}
+
+.session-read-validator-link {
+  color: var(--color-text-muted);
+}
+
+/* --- Header --- */
+
+.session-read-header {
+  margin-bottom: var(--space-6);
+}
+
+.session-read-header h1 {
+  margin: 0;
+  font-size: 1.9rem;
+}
+
+.session-read-time {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.session-read-header .story-heading {
+  margin-top: var(--space-3);
+}
+
+/* --- Audio bar — sticks to the top so play-along survives a long scroll --- */
+
+.session-read-audio {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding: var(--space-3) 0;
+  margin-bottom: var(--space-4);
+  background: var(--color-bg);
+}
+
+.session-read-hint {
+  margin: var(--space-2) 0 0;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+/* --- Transcript --- */
+
+.session-read-transcript {
+  display: flex;
+  flex-direction: column;
+}
+
+.session-read-empty {
+  color: var(--color-text-muted);
+}
+
+/* Speaker label — shown once per speaker turn */
+.session-read-speaker {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-1);
+}
+
+.session-read-speaker-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+.session-read-speaker-raw {
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* Colored dot per speaker, anchored to the left of the name */
+.session-read-speaker::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--speaker-color, var(--color-text-muted));
+  align-self: center;
+  flex-shrink: 0;
+}
+
+/* Transcript line — the readable unit */
+.session-read-line {
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border-left: 3px solid transparent;
+  border-radius: var(--radius);
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--color-text);
+  transition: background-color 0.12s;
+}
+
+/* Click affordance only when audio exists (the component gates the click
+   handlers the same way). Gap lines are playable too — listening to the
+   unclear moment is a first-class action here, so the cursor admits it. */
+.session-read-line--playable {
+  cursor: pointer;
+}
+
+.session-read-line--playable:hover {
+  background: var(--color-active-segment-bg);
+}
+
+.session-read-line.active {
+  background: var(--color-active-segment-bg);
+  border-left-color: var(--speaker-color, var(--color-accent));
+}
+
+.session-read-line:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+/* [unintelligible] — never hidden or prettied away (Honest Transcripts);
+   muted and italic, but with the same click affordance as any other line. */
+.session-read-gap {
+  font-style: italic;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+/* --- Per-speaker color (drives both the dot and the active border).
+   Scoped to the reading view so setting --speaker-color can't touch the
+   .speaker-N classes the Validator's segment cards also use. --- */
+
+.session-read .speaker-0 { --speaker-color: var(--speaker-0); }
+.session-read .speaker-1 { --speaker-color: var(--speaker-1); }
+.session-read .speaker-2 { --speaker-color: var(--speaker-2); }
+.session-read .speaker-3 { --speaker-color: var(--speaker-3); }
+.session-read .speaker-4 { --speaker-color: var(--speaker-4); }
+.session-read .speaker-unknown { --speaker-color: var(--color-text-muted); }

@@ -1,0 +1,13 @@
+# Schema for data/family-names.private.txt (gitignored — holds real family-name variants).
+# Used by scripts/publish.sh: the public export is scanned against these patterns and
+# publishing aborts on any hit; a missing or empty pattern file also aborts (fail loud).
+# One term per line; matched case-insensitive, whole-word, as a fixed string
+# (a multi-word line matches as an exact phrase). '#' lines and blanks are ignored.
+# Tips: include nicknames and known transcription garbles; skip variants that are
+# common English words (false-positive magnets); phrases catch full-name pairings.
+marta
+martie
+marthie
+kiki
+kiran
+marta kiran

@@ -1,0 +1,237 @@
+/*
+ * Design tokens — warm editorial palette inspired by the portfolio's
+ * tell-me-a-story page. Fraunces (display serif) + DM Sans (body) +
+ * IBM Plex Mono (timestamps/code).
+ */
+
+:root {
+  /* Typography */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SF Mono', Menlo, monospace;
+
+  /* Core palette — warm tan/rust (old validator feel) */
+  --color-bg: #E2DACF;
+  --color-surface: #D1C8BB;
+  --color-text: #2C2520;
+  --color-text-muted: #5C5348;
+  --color-accent: #A86840;
+  --color-accent-bg: rgba(168, 104, 64, 0.2);
+  --color-border: rgba(92, 83, 72, 0.35);
+  --color-success: #6B9E71;
+  --color-warning: #B8913C;
+  --color-error: #B06050;
+  --color-maroon: #6A3843;
+  --color-gold: #A86840;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+
+  /* Radii */
+  --radius: 6px;
+  --radius-lg: 12px;
+
+  /* Shadows — warm brown */
+  --shadow-sm: 0 1px 3px rgba(61, 56, 51, 0.08);
+  --shadow-md: 0 4px 12px rgba(61, 56, 51, 0.1);
+
+  /* Speaker colors — semantic assignments */
+  --speaker-0: #2878B5;  /* speaker 0 — strong blue, sat ~65% */
+  --speaker-1: #B5447D;  /* speaker 1 — strong berry, sat ~55% */
+  --speaker-2: #B06050;  /* others */
+  --speaker-3: #8B6CB0;
+  --speaker-4: #8A8078;
+
+  /* Word probability coloring */
+  --color-prob-high: #5E9E66;
+  --color-prob-mid: #B8913C;
+  --color-prob-low: #B06050;
+
+  /* Waveform colors */
+  --waveform-color: #B0A798;
+  --waveform-progress: #A86840;
+  --waveform-cursor: #2C2520;
+  --waveform-minimap: #C4BAA9;
+  --waveform-missed: rgba(176, 96, 80, 0.4);
+
+  /* Active segment highlight */
+  --color-active-segment-bg: rgba(168, 104, 64, 0.08);
+}
+
+/* Dark theme — applied via data-theme="dark" on validator or system preference */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #1C1B1A;
+    --color-surface: #252320;
+    --color-text: #E8E4DD;
+    --color-text-muted: #7A746C;
+    --color-accent: #B87A56;
+    --color-accent-bg: rgba(184, 122, 86, 0.2);
+    --color-border: rgba(122, 116, 108, 0.4);
+    --color-gold: #B87A56;
+    --color-maroon: #C07080;
+    --color-warning: #C9A060;
+    --color-error: #B87070;
+    --speaker-0: #4A9BD4;
+    --speaker-1: #D068A5;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --color-prob-high: #7DAF83;
+    --color-prob-mid: #C9A060;
+    --color-prob-low: #B87070;
+    --waveform-color: #4A4540;
+    --waveform-progress: #B87A56;
+    --waveform-cursor: #E8E4DD;
+    --waveform-minimap: #302D29;
+    --waveform-missed: rgba(184, 112, 112, 0.45);
+    --color-active-segment-bg: rgba(184, 122, 86, 0.08);
+  }
+}
+
+[data-theme="dark"] {
+  --color-bg: #1C1B1A;
+  --color-surface: #252320;
+  --color-text: #E8E4DD;
+  --color-text-muted: #7A746C;
+  --color-accent: #B87A56;
+  --color-accent-bg: rgba(184, 122, 86, 0.2);
+  --color-border: rgba(122, 116, 108, 0.4);
+  --color-gold: #B87A56;
+  --color-maroon: #C07080;
+  --color-warning: #C9A060;
+  --color-error: #B87070;
+  --speaker-0: #4A9BD4;
+  --speaker-1: #D068A5;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --color-prob-high: #7DAF83;
+  --color-prob-mid: #C9A060;
+  --color-prob-low: #B87070;
+  --waveform-color: #4A4540;
+  --waveform-progress: #B87A56;
+  --waveform-cursor: #E8E4DD;
+  --waveform-minimap: #302D29;
+  --waveform-missed: rgba(184, 112, 112, 0.45);
+  --color-active-segment-bg: rgba(184, 122, 86, 0.08);
+}
+
+/* Base styles */
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+/* Utility styles */
+.error {
+  color: var(--color-error);
+}
+
+/* --- Health dot (shared across profile pages) --- */
+
+.health-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.health-dot--green  { background: var(--color-success); }
+.health-dot--yellow { background: var(--color-warning); }
+.health-dot--red    { background: var(--color-error); }
+.health-dot--grey   { background: var(--color-text-muted); opacity: 0.4; }
+
+/* --- Story world chip (shared: Sessions list + per-session story heading) --- */
+
+.story-chip {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* --- Button utilities (shared) --- */
+
+.btn {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn:hover {
+  border-color: var(--color-accent);
+}
+
+.btn--danger {
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+.btn--danger:hover {
+  background: var(--color-error);
+  color: white;
+}
+
+.btn--small {
+  padding: 8px 14px;
+  font-size: 13px;
+  border-radius: 20px;
+}
+
+.btn--active {
+  background: var(--color-accent);
+  color: white;
+  border-color: var(--color-accent);
+}
+
+/* --- Segment card animations --- */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.segment-card {
+  animation: fadeInUp 0.3s ease both;
+}
+
+/* Stagger first 20 cards, then instant for performance */
+.segment-card:nth-child(1)  { animation-delay: 0.02s; }
+.segment-card:nth-child(2)  { animation-delay: 0.04s; }
+.segment-card:nth-child(3)  { animation-delay: 0.06s; }
+.segment-card:nth-child(4)  { animation-delay: 0.08s; }
+.segment-card:nth-child(5)  { animation-delay: 0.10s; }
+.segment-card:nth-child(6)  { animation-delay: 0.12s; }
+.segment-card:nth-child(7)  { animation-delay: 0.14s; }
+.segment-card:nth-child(8)  { animation-delay: 0.16s; }
+.segment-card:nth-child(9)  { animation-delay: 0.18s; }
+.segment-card:nth-child(10) { animation-delay: 0.20s; }
+.segment-card:nth-child(n+21) { animation-delay: 0s; animation-duration: 0.15s; }

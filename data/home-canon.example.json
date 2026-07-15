@@ -1,0 +1,6 @@
+{
+  "_about": "Schema for data/home-canon.json (gitignored — the family's own characters). The third registry (TMAS-57): the roster answers 'which real people exist', the story worlds' casts answer 'which canon characters exist', this answers 'which of OUR characters exist' — the recurring invented characters the family keeps. One canonical spelling each, added ONLY through the Roster page's 'Our characters' section (add-only, validated: collisions with existing characters and with any roster form are refused). Effects: familyfix never questions a correctly-spelled home character; spellingfix proposes the registered spelling for a cluster containing one; world-less spelling clusters file their rulings under the 'Home' world (data/name-book/home.json).",
+  "characters": [
+    { "id": "engine", "canonical": "Jammus" }
+  ]
+}

@@ -1,0 +1,17 @@
+.waveform-player {
+  width: 100%;
+}
+
+.waveform-minimap {
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+}
+
+.waveform-main {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}

@@ -1,0 +1,246 @@
+/*
+ * Roster — the family register. Warm editorial, same language as the rest of
+ * the app (Fraunces for people's names, DM Sans body, IBM Plex Mono for
+ * machine-catch tokens). The visual grammar mirrors the schema's meaning:
+ * legitimate names are solid and warm (serif canonical, rust nickname chips);
+ * aliases — distortions to catch — are mono, dashed, muted. All colors come
+ * from the app tokens, so light and dark themes both hold.
+ */
+
+.roster-page {
+  max-width: 680px;
+}
+
+.roster-sub {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  max-width: 56ch;
+  margin-bottom: var(--space-6);
+}
+
+.roster-sub strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.roster-error {
+  color: var(--color-error);
+  font-size: 0.9rem;
+}
+
+/* --- one person = one ledger card --- */
+
+.roster-person {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-4) var(--space-6);
+  margin-bottom: var(--space-4);
+  transition: box-shadow 120ms ease;
+}
+
+.roster-person:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.roster-person-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.roster-canonical {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: 0.01em;
+}
+
+.roster-circle {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+}
+
+.roster-circle-friend {
+  background: transparent;
+  border: 1px solid var(--color-success);
+  color: var(--color-success);
+}
+
+.roster-role {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+/* --- the two form rows: nicknames (real names) vs aliases (catches) --- */
+
+.roster-forms {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.roster-form-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.roster-form-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  min-width: 6.5rem;
+}
+
+/* a nickname is a legitimate name — warm, solid, serif like the canonical */
+.roster-chip {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  background: var(--color-accent-bg);
+  color: var(--color-text);
+}
+
+/* an alias is a distortion to catch — machine territory: mono, dashed, muted */
+.roster-chip-alias {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 400;
+  background: transparent;
+  border: 1px dashed var(--color-border);
+  color: var(--color-text-muted);
+}
+
+/* --- controls: quiet until touched, never browser-white --- */
+
+.roster-form-row input,
+.roster-form-row select {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-text);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.3rem 0.6rem;
+}
+
+.roster-form-row input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+.roster-form-row input:focus,
+.roster-form-row select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  background: var(--color-bg);
+}
+
+.roster-form-row button {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  background: transparent;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius);
+  padding: 0.28rem 0.75rem;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+.roster-form-row button:hover:not(:disabled) {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.roster-form-row button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* --- add a person: its own quiet panel, set apart from the ledger --- */
+
+.roster-add-person {
+  margin-top: var(--space-8);
+  padding: var(--space-4) var(--space-6);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  background: transparent;
+}
+
+.roster-add-person h2 {
+  font-size: 1.05rem;
+  margin: 0 0 var(--space-3);
+  color: var(--color-text);
+}
+
+/* --- our characters: the home canon, the page's second registry --- */
+
+.roster-characters {
+  margin-top: var(--space-6);
+  padding: var(--space-4) var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.roster-characters h2 {
+  font-size: 1.05rem;
+  margin: 0 0 var(--space-2);
+}
+
+.roster-characters .roster-sub {
+  margin-bottom: var(--space-3);
+}
+
+/* a registered character reads like a name (serif, warm), tinted toward the
+   maroon end so characters and people stay tellable at a glance */
+.roster-chip-character {
+  background: color-mix(in srgb, var(--color-maroon) 14%, transparent);
+  color: var(--color-text);
+}
+
+/* --- what registration triggers (TMAS-72): quiet footnote panel --- */
+
+.roster-hint {
+  margin-top: var(--space-6);
+  padding: var(--space-4) var(--space-6);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.roster-hint h2 {
+  font-size: 1.05rem;
+  margin: 0 0 var(--space-2);
+}
+
+.roster-hint .roster-sub {
+  margin-bottom: 0;
+}
+
+.roster-hint code {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.05rem 0.35rem;
+}

@@ -1,0 +1,159 @@
+.notes-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 380px;
+  background: var(--color-surface);
+  border-left: 1px solid var(--color-border);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.notes-drawer-open {
+  transform: translateX(0);
+}
+
+/* Tab bar */
+.drawer-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.drawer-tab {
+  flex: 1;
+  padding: var(--space-3);
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  border-bottom: 2px solid transparent;
+}
+
+.drawer-tab:hover {
+  color: var(--color-text);
+}
+
+.drawer-tab-active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+/* Content area */
+.drawer-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-3);
+}
+
+.drawer-empty {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: var(--space-6) var(--space-4);
+}
+
+.drawer-actions-top {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--space-3);
+}
+
+/* Note cards */
+.note-card {
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-gold, #BFA265);
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.note-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-1);
+}
+
+.note-jump {
+  background: none;
+  border: none;
+  color: var(--color-accent);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.note-jump:hover {
+  text-decoration: underline;
+}
+
+.note-target {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.note-card-text {
+  margin: 0 0 var(--space-2);
+  font-size: 0.85rem;
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+.note-card-actions {
+  display: flex;
+  gap: var(--space-1);
+}
+
+/* Low confidence groups */
+.lc-group {
+  margin-bottom: var(--space-3);
+}
+
+.lc-group-header {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+  font-family: var(--font-mono, monospace);
+}
+
+.lc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.lc-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.lc-chip:hover {
+  border-color: var(--color-accent);
+}
+
+.lc-chip-prob {
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono, monospace);
+}

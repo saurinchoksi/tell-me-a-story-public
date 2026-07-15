@@ -1,0 +1,88 @@
+.profile-gallery-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.profile-gallery-header h1 {
+  margin: 0;
+}
+
+.profile-gallery-cold-start {
+  padding: var(--space-4);
+  background: var(--color-accent-bg);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-lg);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.profile-gallery-cold-start a {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.profile-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-4);
+}
+
+/* --- Profile card --- */
+
+.profile-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.profile-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.profile-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.profile-card-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.profile-card-role {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-transform: capitalize;
+}
+
+.profile-card-stats {
+  display: flex;
+  gap: var(--space-4);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.profile-card-stat {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.profile-card-last-seen {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: auto;
+}
+

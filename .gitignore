@@ -1,0 +1,84 @@
+# Python
+venv/
+venv-unified/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Sessions (private audio files and transcripts)
+sessions/*
+
+# Inbox (input staging area — audio files + rejected duplicates)
+inbox/*
+!inbox/.gitkeep
+
+# Debug output
+sessions/debug/
+
+# IDE
+.vscode/
+.idea/
+.claude/
+
+# Claude context (personal)
+CLAUDE.md*.swp
+*.swp
+
+# Checkpoints
+checkpoints/
+
+# Frontend
+ui/node_modules/
+ui/dist/
+
+# Speaker profiles (private voice data)
+data/speaker_profiles.json
+
+# Family-name roster for detectors (real names) — schema documented in data/name_roster.example.json
+data/name_roster.json
+
+# Family-name patterns for the publish scan (real-name variants) — schema in data/family-names.example.txt
+data/family-names.private.txt
+
+# Home canon — the family's own registered characters (TMAS-57) — schema in data/home-canon.example.json
+data/home-canon.json
+
+# The Name Book (human rulings; the family's book holds real names) — schema in data/name-book.example.json; synced to the private data repo
+data/name-book/
+
+# Integration-test audio (family content — never committed; local machines only)
+tests/fixtures/audio.m4a
+
+# Experiments (scripts run locally, results are generated output)
+experiments/
+
+
+# EMP per-session HTML visuals (contain transcript text)
+emp/results/visuals/
+
+# TMAS-46 gap-classify sidecars (Whisper cache + by-ear "what I hear" notes = family speech)
+emp/results/gap-classify/*.json
+
+# Private real-name data (family roster); count.py reads it for M9a counting only, never committed
+emp/results/pivot-notes.private.json*
+
+# Key-candidate survey output (carries family-name garbles + the kids' character names)
+emp/results/key-candidate-survey.json
+
+# Interactive review scaffolding (regenerable HTML + co-edited working notes)
+emp/writeup/*-review.html
+emp/writeup/*-notes.json
+
+# Private working doc (Sierra positioning + family names) - never commit
+emp/emp.md
+
+# Private working notes that carry family names (the .private.md convention) — never commit
+*.private.md
+
+# World-classifier cold test: answer key + predictions reference REAL held-out sessions
+emp/results/worlds-bench/cold*
+data/worlds-cache/
+*.json.bak
+
+# TMAS-92 deep read — private family content, never in the public repo
+deepread/

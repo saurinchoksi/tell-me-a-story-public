@@ -1,0 +1,473 @@
+/* --- Session detections — per-session drill-down from the Monitor --- */
+
+.session-detections-page {
+  max-width: 800px;
+  padding: var(--space-6) var(--space-4);
+}
+
+.session-detections-back {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.session-detections-back:hover {
+  text-decoration: underline;
+}
+
+.session-detections-header {
+  margin-bottom: var(--space-6);
+}
+
+.session-detections-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.session-detections-header h1 {
+  margin: 0 0 var(--space-1);
+}
+
+.session-detections-rescan {
+  flex-shrink: 0;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius);
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.session-detections-rescan:hover:not(:disabled) {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.session-detections-rescan:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.session-detections-warning {
+  font-size: 0.8rem;
+  color: var(--color-warning);
+  margin: var(--space-2) 0 0;
+}
+
+.detection-stale {
+  color: var(--color-warning);
+}
+
+.session-detections-subtitle {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* Detector section */
+
+.detection-section {
+  margin-bottom: var(--space-8);
+}
+
+.detection-section-header {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-3);
+  padding-bottom: var(--space-2);
+  margin-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.detection-section-mode {
+  padding: 1px 8px;
+  border-radius: var(--radius);
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.detection-section-label {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.detection-section-meta {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.detection-section-clean {
+  font-size: 0.85rem;
+  color: var(--color-success);
+}
+
+/* Flag cards */
+
+.detection-flags {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.detection-flag {
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.detection-flag-top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+/* Per-flag clip player — plays the audio around the flagged word */
+.detection-flag-play {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-accent);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  line-height: 1;
+  padding: 0;
+  transition: background-color 0.1s, border-color 0.1s;
+}
+
+.detection-flag-play:hover:not(:disabled) {
+  background: var(--color-accent-bg);
+  border-color: var(--color-accent);
+}
+
+.detection-flag-play:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.detection-flag-token {
+  padding: 1px 8px;
+  border-radius: var(--radius);
+  background: rgba(184, 145, 60, 0.18);
+  color: var(--color-warning);
+  font-weight: 600;
+}
+
+.detection-flag-arrow {
+  color: var(--color-text-muted);
+}
+
+.detection-flag-canonical {
+  font-weight: 600;
+  color: var(--color-success);
+}
+
+/* Badge color — one per detector so the three sections are visually distinct */
+/* M9a — a family-name match */
+.detection-flag-type--family {
+  border-color: var(--color-maroon);
+  color: var(--color-maroon);
+}
+
+/* M9b — a spelling inconsistent with the recording's majority */
+.detection-flag-type--inconsistent {
+  border-color: var(--color-warning);
+  color: var(--color-warning);
+}
+
+/* M9c — a sourced-canon name spelled wrong */
+.detection-flag-type--canon {
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+/* M9c — the story's inferred world (e.g. "Thomas & Friends") */
+.detection-flag-world {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.detection-flag-type {
+  padding: 1px 6px;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+.detection-flag-meta {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.detection-flag-text {
+  margin: 0 0 var(--space-2);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.detection-flag-text--missing {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.detection-flag-codes {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+/* All detectors — occurrences grouped under one header per name */
+
+.detection-groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.detection-group-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.detection-group-count {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.detection-group-spellings {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  align-items: center;
+}
+
+/* Clickable spelling (M9b) — click a correct spelling to remove it from the flags.
+   Hover shows an × and a red cue, because the click removes the name from the list. */
+.spelling-chip {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  padding: 0 var(--space-1);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: none;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+
+.spelling-chip:hover {
+  color: var(--color-error);
+  border-color: var(--color-error);
+  background: rgba(176, 96, 80, 0.1);
+}
+
+.spelling-chip-x {
+  opacity: 0;
+  font-weight: 600;
+  transition: opacity 0.12s;
+}
+
+.spelling-chip:hover .spelling-chip-x {
+  opacity: 1;
+}
+
+/* "Not canon" verdict button on an M9c group header */
+.detection-verdict-btn {
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 1px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: none;
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+
+.detection-verdict-btn:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* "Your corrections" foldout — the human verdicts applied to this session */
+.detection-corrections {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+  padding: var(--space-2) var(--space-3);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.detection-corrections-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.detection-correction {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: 0.8rem;
+  color: var(--color-text);
+}
+
+.detection-correction-stale {
+  color: var(--color-warning);
+  cursor: default;
+}
+
+.detection-correction-undo {
+  padding: 0 var(--space-1);
+  border: none;
+  background: none;
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.detection-correction-undo:hover {
+  text-decoration: underline;
+}
+
+/* nest the occurrence cards under their group header */
+.detection-group .detection-flags {
+  gap: var(--space-2);
+  margin-left: var(--space-3);
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-border);
+}
+
+/* M9c confidence tiers — confident shows plainly; best-guess and low are framed + de-emphasized.
+   The suggested-name color steps down green → amber → grey so the tier reads at a glance. */
+.detection-tier {
+  margin-top: var(--space-5);
+  padding: var(--space-3) 0 var(--space-2) var(--space-4);
+  border-left: 3px solid var(--color-border);
+}
+
+.detection-tier--bestguess {
+  border-left-color: var(--color-warning);
+  background: rgba(184, 145, 60, 0.04);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.detection-tier--bestguess .detection-flag-canonical {
+  color: var(--color-warning);
+}
+
+.detection-tier--low {
+  opacity: 0.92;
+}
+
+.detection-tier--low .detection-flag-canonical {
+  color: var(--color-text-muted);
+}
+
+/* Cascade the tier color to the "canon" badge too, so a row reads one confidence level
+   (otherwise an amber/grey name sits next to a green badge — a mixed signal). */
+.detection-tier--bestguess .detection-flag-type--canon {
+  border-color: var(--color-warning);
+  color: var(--color-warning);
+}
+
+.detection-tier--low .detection-flag-type--canon {
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.detection-tier-label {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.detection-tier--bestguess > .detection-tier-label {
+  color: var(--color-warning);
+}
+
+.detection-tier-hint {
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.detection-tier-toggle {
+  display: inline-block;
+  margin-top: var(--space-3);
+  padding: var(--space-1) 0;
+  border: none;
+  background: none;
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.detection-tier-toggle:hover {
+  text-decoration: underline;
+}
+
+/* Empty state */
+
+.session-detections-empty {
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+}
+
+.session-detections-empty h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-2);
+}

@@ -1,0 +1,21 @@
+{
+  "_about": "Example Name Book file (fake data). Real books live at data/name-book/<world-slug>.json — gitignored (the family's book holds real names) and synced to the private data repo. One file per story world; ONLY explicit human gestures on /name-review write these. See docs/name-architecture.md and src/namebook.py.",
+  "_world": "Example World",
+  "_version": 2,
+  "yes": [
+    {
+      "heard": "Bushma",
+      "canonical": "Bhishma",
+      "provenance": "bless:20260101-000000",
+      "at": "2026-07-02T00:00:00+00:00"
+    }
+  ],
+  "no": [
+    {
+      "heard_cleaned": "jammus",
+      "provenance": "reject:20260101-000000",
+      "at": "2026-07-02T00:00:00+00:00"
+    }
+  ],
+  "spellings": []
+}

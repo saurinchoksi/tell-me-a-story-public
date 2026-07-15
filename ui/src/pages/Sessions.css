@@ -1,0 +1,429 @@
+/* --- Sessions page — compact row list --- */
+
+.sessions-page {
+  max-width: 800px;
+  padding: var(--space-6) var(--space-4);
+}
+
+/* Header */
+
+.sessions-header {
+  margin-bottom: var(--space-6);
+}
+
+.sessions-header h1 {
+  margin: 0 0 var(--space-1);
+}
+
+.sessions-subtitle {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* Row list */
+
+.sessions-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Column headers — grid mirrors .session-row for rigid alignment */
+
+.session-list-header {
+  display: grid;
+  grid-template-columns: 152px 68px 52px 80px 84px 44px 1fr;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  border-top: 1px solid var(--color-border);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+
+/* Sortable column headers — buttons styled to match the surrounding labels */
+
+.session-sort-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  background: none;
+  border: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.session-sort-header:hover {
+  color: var(--color-text);
+}
+
+.session-sort-header--active {
+  color: var(--color-text);
+}
+
+.session-sort-arrow {
+  font-size: 0.65rem;
+  line-height: 1;
+  width: 0.7em;
+  display: inline-block;
+}
+
+/* Row — CSS grid for rigid column alignment */
+
+.session-row {
+  display: grid;
+  grid-template-columns: 152px 68px 52px 80px 84px 44px 1fr;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 0.1s;
+}
+
+.session-row:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
+.session-row:hover {
+  background: var(--color-accent-bg);
+}
+
+/* Date column */
+
+.session-row-day {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.session-row-day--link {
+  color: var(--color-accent);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.session-row-day--link:hover {
+  text-decoration: underline;
+}
+
+/* Time column */
+
+.session-row-time {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* Length column */
+
+.session-row-length {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* Pipeline dots — compact inline with CSS tooltips */
+
+.session-row-pipeline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.pipeline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  cursor: default;
+}
+
+.pipeline-dot--done {
+  background: var(--color-success);
+}
+
+.pipeline-dot--pending {
+  background: var(--color-text-muted);
+  opacity: 0.25;
+}
+
+/* Tooltip — CSS-only via data-label */
+
+.pipeline-dot::after,
+.pipeline-warning::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px 8px;
+  border-radius: var(--radius);
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-size: 0.7rem;
+  font-family: var(--font-body);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+
+.pipeline-dot:hover::after,
+.pipeline-warning:hover::after {
+  opacity: 1;
+}
+
+/* Pipeline-health warning — shown when a _processing stage errored */
+
+.pipeline-warning {
+  position: relative;
+  margin-left: var(--space-1);
+  font-size: 0.8rem;
+  line-height: 1;
+  color: var(--color-error);
+  cursor: default;
+}
+
+/* Validation status — clickable 3-state indicator */
+
+.validation-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  background: none;
+  border: none;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.validation-status:disabled {
+  cursor: default;
+}
+
+.validation-status-icon {
+  font-size: 0.9rem;
+}
+
+.validation-status--not_started {
+  color: var(--color-text-muted);
+  opacity: 0.5;
+}
+
+.validation-status--in_progress {
+  color: var(--color-accent);
+}
+
+.validation-status--done {
+  color: var(--color-success);
+}
+
+.validation-status:hover:not(:disabled) {
+  opacity: 1;
+}
+
+/* Notes-count column */
+
+.session-row-notes {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* Speakers icon — small, right-aligned link to the speakers identification page */
+
+.session-row-speakers {
+  justify-self: end;
+  font-size: 0.95rem;
+  text-decoration: none;
+  opacity: 0.55;
+  transition: opacity 0.15s;
+  line-height: 1;
+}
+
+.session-row-speakers:hover {
+  opacity: 1;
+}
+
+/* Story line — full-width content row: what this recording holds.
+   Recognized worlds render as chips; the lead story title follows. */
+
+.session-row-stories {
+  grid-column: 1 / -1;
+  margin-top: var(--space-1);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.session-row-stories-icon {
+  font-size: 0.85rem;
+  line-height: 1;
+  opacity: 0.6;
+}
+
+.session-row-stories-title {
+  color: var(--color-text);
+}
+
+/* (.story-chip is a shared primitive in App.css — used here and in StoryHeading) */
+
+/* Session-level note — full-width second line of the row */
+
+.session-note {
+  grid-column: 1 / -1;
+  margin-top: var(--space-1);
+}
+
+.session-note-display,
+.session-note-add {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  max-width: 100%;
+  padding: 2px 0;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.session-note-display {
+  color: var(--color-text-muted);
+}
+
+.session-note-text {
+  white-space: pre-wrap;
+}
+
+.session-note-pencil {
+  flex-shrink: 0;
+  color: var(--color-accent);
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.session-note-display:hover .session-note-pencil {
+  opacity: 1;
+}
+
+.session-note-add {
+  color: var(--color-accent);
+}
+
+.session-note-add:hover {
+  text-decoration: underline;
+}
+
+/* Note — editing state */
+
+.session-note--editing {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.session-note-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  resize: vertical;
+}
+
+.session-note-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.session-note-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.session-note-save,
+.session-note-cancel {
+  padding: 2px 10px;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.session-note-save {
+  background: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  color: var(--color-bg);
+  font-weight: 600;
+}
+
+.session-note-save:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.session-note-cancel {
+  background: none;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.session-note-error {
+  font-size: 0.75rem;
+  color: var(--color-error);
+}
+
+/* Empty state */
+
+.sessions-empty {
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+}
+
+.sessions-empty h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* Responsive: collapse grid to stacked on narrow screens */
+
+@media (max-width: 540px) {
+  .session-list-header {
+    display: none;
+  }
+
+  /* Collapse the 7-column grid to a single wrapping flex row.
+     Flex avoids fragile per-cell grid placement; the note is
+     forced onto its own line. */
+  .session-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1) var(--space-3);
+  }
+
+  .session-note {
+    flex-basis: 100%;
+  }
+}

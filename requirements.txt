@@ -1,0 +1,6 @@
+mlx-whisper
+pyannote.audio>=4.0  # diarize.py loads the community-1 model, which requires pyannote.audio 4.x
+pytest
+mutagen
+flask-cors
+metaphone

@@ -1,0 +1,268 @@
+/* ValidatorPage — full-viewport layout outside the app's Layout wrapper */
+
+.validator-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+/* Loading / error states */
+.validator-loading,
+.validator-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: var(--space-4);
+  color: var(--color-text-muted);
+  font-family: var(--font-display);
+}
+
+.validator-error a {
+  color: var(--color-accent);
+}
+
+/* Header — matches old validator .header */
+.validator-header {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  gap: 20px;
+  padding: 0 24px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.85rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.validator-back {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.validator-back:hover {
+  text-decoration: underline;
+}
+
+.validator-session-id {
+  font-family: var(--font-mono);
+  color: var(--color-maroon, var(--color-text-muted));
+  font-weight: 500;
+}
+
+.validator-time {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--color-text);
+  background: var(--color-bg);
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  letter-spacing: 0.5px;
+}
+
+.validator-label-progress {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  padding: 6px 12px;
+  background: var(--color-bg);
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+}
+
+/* Session selector dropdown */
+.validator-session-select {
+  padding: 10px 14px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  cursor: pointer;
+  min-width: 200px;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.validator-session-select:hover {
+  border-color: var(--color-accent-bg);
+}
+
+.validator-session-select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(168, 104, 64, 0.4);
+}
+
+/* Controls bar — matches old validator .controls */
+.validator-controls {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  gap: 24px;
+  padding: 0 24px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+
+.controls-playback,
+.controls-filters,
+.controls-actions {
+  display: flex;
+  gap: 6px;
+}
+
+/* Playback-speed dropdown — a sibling of the pill buttons in .controls-playback.
+   Matches .btn--small (pill radius, body font, surface + border + shadow) so the
+   control row stays uniform; swaps the OS chevron for a terracotta caret and
+   reuses the session-select's accent focus ring. */
+.speed-select {
+  padding: 8px 30px 8px 14px;
+  font: 13px var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5l3.5 3.5 3.5-3.5' fill='none' stroke='%23A86840' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.speed-select:hover {
+  border-color: var(--color-accent);
+}
+
+.speed-select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(168, 104, 64, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Re-tint the caret to the dark accent — the one value a data-URI can't read from a token. */
+  .speed-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5l3.5 3.5 3.5-3.5' fill='none' stroke='%23B87A56' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+}
+
+/* Missed-speech stepper position readout ("3/29") beside the ‹ › buttons */
+.missed-cursor {
+  align-self: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-text-muted);
+  padding: 0 4px;
+  white-space: nowrap;
+}
+
+/* Hear-box (TMAS-75) — the ear-check row that appears with the stepper.
+   One line under the controls bar: span readout, "what I hear" text,
+   verdict pills (reusing .btn--small). */
+.missed-hearbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 24px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+
+.missed-hearbox-span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.missed-hearbox-text {
+  flex: 1;
+  min-width: 200px;
+  resize: vertical;
+  padding: 8px 14px;
+  font: 13px var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.missed-hearbox-text:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(168, 104, 64, 0.4);
+}
+
+.missed-hearbox-verdicts {
+  display: flex;
+  gap: 6px;
+}
+
+/* Save outcome ("saved" / "⚠ save failed") — the hear-box is ground truth,
+   so a failed write is surfaced in the panel, not just the console. */
+.missed-hearbox-status {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.missed-hearbox-status--warn {
+  color: var(--color-accent);
+}
+
+/* Segment list — scrollable area */
+.validator-segments {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-4);
+  transition: padding-right 0.3s;
+}
+
+.validator-segments.drawer-open {
+  padding-right: 400px;
+}
+
+/* Keyboard hints bar — fixed bottom */
+.keyboard-hints {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  gap: 24px;
+  padding: 0 24px;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+
+.keyboard-hints kbd {
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  background: var(--color-bg);
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--color-text);
+  margin-right: 2px;
+  box-shadow: 0 1px 2px rgba(61, 56, 51, 0.08);
+}

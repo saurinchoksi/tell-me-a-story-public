@@ -1,0 +1,267 @@
+/* SegmentCard — transcript segment rendering */
+
+.segment-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-2);
+  background: var(--color-surface);
+  border-left: 3px solid transparent;
+  box-shadow: var(--shadow-sm);
+  transition: opacity 0.2s, border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.segment-card.active {
+  background: var(--color-active-segment-bg, rgba(168, 104, 64, 0.08));
+  box-shadow: var(--shadow-md);
+}
+
+.segment-card.filtered {
+  opacity: 0.35;
+}
+
+/* Gap segments — dashed border, muted */
+.segment-card.segment-gap {
+  border-style: dashed;
+  background: var(--color-bg);
+}
+
+/* Speaker-colored left borders */
+.segment-card.speaker-0 { border-left-color: var(--speaker-0); }
+.segment-card.speaker-1 { border-left-color: var(--speaker-1); }
+.segment-card.speaker-2 { border-left-color: var(--speaker-2); }
+.segment-card.speaker-3 { border-left-color: var(--speaker-3); }
+.segment-card.speaker-4 { border-left-color: var(--speaker-4); }
+.segment-card.speaker-unknown { border-left-color: var(--color-text-muted); }
+
+/* Preserve speaker color on hover and active states */
+.segment-card.speaker-0:hover,
+.segment-card.speaker-0.active { border-left-color: var(--speaker-0); }
+.segment-card.speaker-1:hover,
+.segment-card.speaker-1.active { border-left-color: var(--speaker-1); }
+.segment-card.speaker-2:hover,
+.segment-card.speaker-2.active { border-left-color: var(--speaker-2); }
+.segment-card.speaker-3:hover,
+.segment-card.speaker-3.active { border-left-color: var(--speaker-3); }
+.segment-card.speaker-4:hover,
+.segment-card.speaker-4.active { border-left-color: var(--speaker-4); }
+.segment-card.speaker-unknown:hover,
+.segment-card.speaker-unknown.active { border-left-color: var(--color-text-muted); }
+
+/* Header row */
+.segment-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+
+.segment-header:hover {
+  color: var(--color-text);
+}
+
+.segment-id {
+  font-weight: 600;
+  font-family: var(--font-mono, monospace);
+}
+
+.segment-time {
+  font-family: var(--font-mono, monospace);
+}
+
+/* Speaker name — contained chip above metadata */
+.segment-speaker-name {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-2);
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--radius);
+  color: var(--color-text);
+}
+
+.segment-speaker-name.speaker-0 { background: rgba(40, 120, 181, 0.15); }
+.segment-speaker-name.speaker-1 { background: rgba(181, 68, 125, 0.15); }
+.segment-speaker-name.speaker-2 { background: rgba(176, 96, 80, 0.15); }
+.segment-speaker-name.speaker-3 { background: rgba(139, 108, 176, 0.15); }
+.segment-speaker-name.speaker-4 { background: rgba(138, 128, 120, 0.15); }
+.segment-speaker-name.speaker-unknown { background: rgba(92, 83, 72, 0.12); }
+
+/* Raw SPEAKER_XX labels: muted outline treatment to signal "not yet identified".
+   Extra .segment-speaker-name qualifier ensures this overrides .speaker-N backgrounds
+   regardless of source order. */
+.segment-speaker-name.segment-speaker-name.speaker-raw {
+  background: transparent;
+  border: 1px dashed var(--color-border);
+  color: var(--color-text-muted);
+  font-weight: 400;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0;
+}
+
+/* Badge row */
+.segment-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-bottom: var(--space-2);
+}
+
+.badge {
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: var(--radius);
+  font-size: 0.65rem;
+  font-family: var(--font-mono, monospace);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.badge-note {
+  background: var(--color-gold, #BFA265);
+  color: white;
+  border-color: var(--color-gold, #BFA265);
+}
+
+.badge-filter {
+  background: transparent;
+}
+
+.badge-filter-active {
+  background: var(--color-error);
+  color: white;
+  border-color: var(--color-error);
+}
+
+/* Axial-code chip row — one selection per segment for EMP step 5 counting */
+.segment-axial-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  margin-bottom: var(--space-2);
+}
+
+.axial-chip {
+  min-width: 26px;
+  padding: 2px 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.1s, color 0.1s, border-color 0.1s;
+}
+
+.axial-chip:hover {
+  background: var(--color-accent-bg);
+  color: var(--color-text);
+}
+
+.axial-chip-selected {
+  background: var(--color-gold, #BFA265);
+  border-color: var(--color-gold, #BFA265);
+  color: white;
+}
+
+.axial-chip-nota.axial-chip-selected {
+  background: var(--color-text-muted);
+  border-color: var(--color-text-muted);
+}
+
+/* M10 (broken-Whisper stretch) is high-severity — selected chip uses the error color */
+.axial-chip-m10.axial-chip-selected {
+  background: var(--color-error);
+  border-color: var(--color-error);
+}
+
+/* Visual cue for unlabeled segments — subtle dotted bottom border on the chip row */
+.segment-card.segment-unlabeled .segment-axial-chips {
+  border-bottom: 1px dotted var(--color-border);
+  padding-bottom: 4px;
+}
+
+/* Gap body */
+.segment-gap-body {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.gap-label {
+  font-size: 0.85rem;
+}
+
+.gap-duration {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+}
+
+/* Word spans */
+.segment-words {
+  line-height: 1.6;
+}
+
+.word-span {
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 0.1s;
+  position: relative;
+}
+
+.word-span:hover {
+  background: var(--color-accent-bg);
+}
+
+.word-span.active {
+  background: var(--color-gold, #BFA265);
+  color: white;
+  border-radius: 2px;
+}
+
+/* Probability coloring */
+.word-span.prob-high { color: var(--color-prob-high, #16a34a); }
+.word-span.prob-mid { color: var(--color-prob-mid, #ca8a04); }
+.word-span.prob-low { color: var(--color-prob-low, #dc2626); }
+
+/* Speaker mismatch — wavy underline */
+.word-span.speaker-mismatch {
+  text-decoration: underline wavy;
+  text-decoration-color: var(--color-error);
+  text-underline-offset: 3px;
+}
+
+/* Correction indicator */
+.word-span.word-corrected {
+  font-style: italic;
+}
+
+/* Tooltip via data attribute + ::after */
+.word-span[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-size: 0.65rem;
+  font-family: var(--font-mono, monospace);
+  white-space: nowrap;
+  border-radius: var(--radius);
+  z-index: 100;
+  pointer-events: none;
+}

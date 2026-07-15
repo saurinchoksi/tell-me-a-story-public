@@ -1,0 +1,415 @@
+{
+  "_version": "0.1.0",
+  "_description": "Mahabharata reference library. Canonical names, transliteration variants, aliases, and descriptions for characters, groups, places, and concepts.",
+
+  "entries": [
+
+    {
+      "canonical": "Yudhishthira",
+      "category": "pandava",
+      "variants": ["Yudhisthir", "Yudhisthira", "Yudhishtir", "Yudhishthir", "Yudishthira"],
+      "aliases": ["Dharmaraja", "Ajatashatru"],
+      "description": "Eldest Pandava brother. Son of Kunti and Dharma. Known for his unwavering commitment to truth and righteousness. Becomes king after the war."
+    },
+    {
+      "canonical": "Bhima",
+      "category": "pandava",
+      "variants": ["Bheema", "Bheem"],
+      "aliases": ["Vrikodara", "Bhimasena"],
+      "description": "Second Pandava brother. Son of Kunti and Vayu (wind god). Known for his immense strength and appetite. Kills Duryodhana and Dushasana."
+    },
+    {
+      "canonical": "Arjuna",
+      "category": "pandava",
+      "variants": ["Arjun"],
+      "aliases": ["Partha", "Dhananjaya", "Gudakesha", "Savyasachi", "Vijaya"],
+      "description": "Third Pandava brother. Son of Kunti and Indra. Greatest archer of his age. Recipient of Krishna's teachings in the Bhagavad Gita."
+    },
+    {
+      "canonical": "Nakula",
+      "category": "pandava",
+      "variants": ["Nakul"],
+      "aliases": [],
+      "description": "Fourth Pandava brother, one of the twins. Son of Madri and the Ashvini Kumaras. Known for his beauty and skill with horses and swords."
+    },
+    {
+      "canonical": "Sahadeva",
+      "category": "pandava",
+      "variants": ["Sahadev", "Sahdev"],
+      "aliases": [],
+      "description": "Fifth Pandava brother, one of the twins. Son of Madri and the Ashvini Kumaras. Known for his wisdom and knowledge of astrology."
+    },
+    {
+      "canonical": "Kunti",
+      "category": "pandava",
+      "variants": ["Kunthi"],
+      "aliases": ["Pritha"],
+      "description": "Mother of the three elder Pandavas (Yudhishthira, Bhima, Arjuna). Wife of Pandu. Received a boon to invoke gods and bear their children."
+    },
+    {
+      "canonical": "Pandu",
+      "category": "pandava",
+      "variants": ["Pandoo"],
+      "aliases": [],
+      "description": "Father of the five Pandavas. King of Hastinapura who abdicated due to a curse. Brother of Dhritarashtra and Vidura."
+    },
+    {
+      "canonical": "Madri",
+      "category": "pandava",
+      "variants": [],
+      "aliases": [],
+      "description": "Mother of the twin Pandavas (Nakula and Sahadeva). Second wife of Pandu. Princess of Madra."
+    },
+    {
+      "canonical": "Draupadi",
+      "category": "pandava",
+      "variants": ["Dropadi", "Drowpadi", "Draupathi"],
+      "aliases": ["Panchali", "Krishnaa", "Yajnaseni"],
+      "description": "Wife of all five Pandava brothers. Daughter of King Drupada, born from a sacred fire. Her humiliation in court is a key trigger for the war."
+    },
+    {
+      "canonical": "Abhimanyu",
+      "category": "pandava",
+      "variants": ["Abhimanu", "Abhimanue"],
+      "aliases": [],
+      "description": "Son of Arjuna and Subhadra. Learned to enter the Chakravyuha formation while still in the womb but not how to exit it. Killed tragically at age sixteen."
+    },
+
+    {
+      "canonical": "Duryodhana",
+      "category": "kaurava",
+      "variants": ["Duryodhan", "Duryodana"],
+      "aliases": ["Suyodhana"],
+      "description": "Eldest of the hundred Kaurava brothers. Primary antagonist. Son of Dhritarashtra and Gandhari. His jealousy of the Pandavas drives the central conflict."
+    },
+    {
+      "canonical": "Dushasana",
+      "category": "kaurava",
+      "variants": ["Dushasan", "Dusshasana", "Dussasana", "Dushyasan"],
+      "aliases": [],
+      "description": "Second Kaurava brother. Attempted to disrobe Draupadi in court. Killed by Bhima who fulfills his vow to drink Dushasana's blood."
+    },
+    {
+      "canonical": "Dhritarashtra",
+      "category": "elder",
+      "variants": ["Dhritrashtra", "Dhritarastra", "Dhritarashtr", "Dhritrashtr"],
+      "aliases": [],
+      "description": "Blind king of Hastinapura. Father of the hundred Kauravas. His inability to restrain his sons is a central failure of the story."
+    },
+    {
+      "canonical": "Gandhari",
+      "category": "elder",
+      "variants": ["Gandhaari", "Gaandhari"],
+      "aliases": [],
+      "description": "Wife of Dhritarashtra, mother of the hundred Kauravas. Blindfolded herself for life in solidarity with her blind husband. Princess of Gandhara."
+    },
+    {
+      "canonical": "Shakuni",
+      "category": "kaurava",
+      "variants": ["Shakuni Mama", "Shakunee"],
+      "aliases": [],
+      "description": "Gandhari's brother, uncle to the Kauravas. Master manipulator and dice player. Engineers the rigged dice game that sends the Pandavas into exile."
+    },
+
+    {
+      "canonical": "Bhishma",
+      "category": "elder",
+      "variants": ["Bheeshma", "Bheeshm", "Bhishm"],
+      "aliases": ["Devavrata", "Gangaputra", "Pitamaha"],
+      "description": "Grandsire of both the Pandavas and Kauravas. Took a vow of celibacy so his father could marry Satyavati. Lies on a bed of arrows at Kurukshetra."
+    },
+    {
+      "canonical": "Drona",
+      "category": "elder",
+      "variants": ["Dron"],
+      "aliases": ["Dronacharya", "Guru Drona"],
+      "description": "Teacher of both the Pandavas and Kauravas in warfare and martial arts. Father of Ashvatthama. Fights on the Kaurava side in the war."
+    },
+    {
+      "canonical": "Vidura",
+      "category": "elder",
+      "variants": ["Vidhura", "Vidur"],
+      "aliases": [],
+      "description": "Half-brother of Dhritarashtra and Pandu. Known for his wisdom and counsel. Often the moral voice advising the blind king. Incarnation of Yama in some traditions."
+    },
+    {
+      "canonical": "Kripacharya",
+      "category": "elder",
+      "variants": ["Krupacharya"],
+      "aliases": ["Kripa"],
+      "description": "One of the teachers of the princes. One of the few warriors to survive the war on the Kaurava side."
+    },
+
+    {
+      "canonical": "Krishna",
+      "category": "divine",
+      "variants": ["Krishn"],
+      "aliases": ["Govinda", "Vasudeva", "Keshava", "Madhava", "Hari", "Shyam"],
+      "description": "Eighth avatar of Vishnu. Arjuna's charioteer and guide. Delivers the Bhagavad Gita on the battlefield. Central figure who guides the Pandavas."
+    },
+    {
+      "canonical": "Karna",
+      "category": "warrior",
+      "variants": ["Karn"],
+      "aliases": ["Radheya", "Vasusena", "Suryaputra", "Angaraj"],
+      "description": "Secret eldest son of Kunti and Surya (sun god), raised by a charioteer. Loyal friend of Duryodhana. Tragic hero — fights against his own brothers without knowing the truth."
+    },
+    {
+      "canonical": "Ashvatthama",
+      "category": "warrior",
+      "variants": ["Ashwatthama", "Ashwathama", "Ashvatthaman"],
+      "aliases": [],
+      "description": "Son of Drona. One of the warriors cursed to immortality. Commits a terrible act of vengeance after the war by attacking the Pandava camp at night."
+    },
+
+    {
+      "canonical": "Vyasa",
+      "category": "divine",
+      "variants": ["Vyas", "Ved Vyas"],
+      "aliases": ["Veda Vyasa", "Krishna Dvaipayana"],
+      "description": "Sage who composed the Mahabharata. Grandfather of both the Pandavas and Kauravas through his sons Dhritarashtra, Pandu, and Vidura."
+    },
+    {
+      "canonical": "Ganesha",
+      "category": "divine",
+      "variants": ["Ganesh", "Ganapati"],
+      "aliases": ["Vinayaka"],
+      "description": "Elephant-headed god who served as the scribe, writing down the Mahabharata as Vyasa dictated it."
+    },
+    {
+      "canonical": "Subhadra",
+      "category": "pandava",
+      "variants": [],
+      "aliases": [],
+      "description": "Krishna's sister. Wife of Arjuna. Mother of Abhimanyu."
+    },
+    {
+      "canonical": "Drupada",
+      "category": "ally",
+      "variants": ["Drupad"],
+      "aliases": [],
+      "description": "King of Panchala. Father of Draupadi, Dhrishtadyumna, and Shikhandi. Former classmate and rival of Drona."
+    },
+    {
+      "canonical": "Amba",
+      "category": "warrior",
+      "variants": [],
+      "aliases": [],
+      "description": "Princess of Kashi abducted by Bhishma for his half-brother's marriage. Already in love with King Shalva, who rejected her after the abduction. Bhishma refused to marry her due to his vow. She devoted her life to vengeance and was reborn as Shikhandi."
+    },
+    {
+      "canonical": "Shikhandi",
+      "category": "ally",
+      "variants": ["Shikhandee", "Sikhandin"],
+      "aliases": [],
+      "description": "Rebirth of Amba. Child of Drupada, sibling of Draupadi. Born female, becomes male. Bhishma refuses to fight Shikhandi on the battlefield, recognizing Amba. Arjuna uses this to pierce Bhishma with arrows, leading to his fall."
+    },
+    {
+      "canonical": "Dhrishtadyumna",
+      "category": "ally",
+      "variants": ["Drishtadyumna", "Dhristadyumna", "Dhrishtadyumn"],
+      "aliases": [],
+      "description": "Son of Drupada. Commander of the Pandava army. Born from fire specifically to kill Drona."
+    },
+    {
+      "canonical": "Satyavati",
+      "category": "elder",
+      "variants": ["Satyawati"],
+      "aliases": ["Matsyagandha"],
+      "description": "Queen of Hastinapura. Mother of Vyasa. Grandmother whose choices set the entire dynasty in motion."
+    },
+    {
+      "canonical": "Jayadratha",
+      "category": "kaurava",
+      "variants": ["Jayadrath", "Jaidrath"],
+      "aliases": [],
+      "description": "King of Sindhu. Husband of Dusshala (the Kaurava sister). Blocked the Pandava army from saving Abhimanyu in the Chakravyuha."
+    },
+    {
+      "canonical": "Ekalavya",
+      "category": "warrior",
+      "variants": ["Eklavya", "Eklavaya"],
+      "aliases": [],
+      "description": "Tribal prince who taught himself archery by practicing before a clay idol of Drona. Asked to give his thumb as guru dakshina."
+    },
+    {
+      "canonical": "Ghatotkacha",
+      "category": "pandava",
+      "variants": ["Ghatotkach"],
+      "aliases": [],
+      "description": "Son of Bhima and the rakshasi Hidimbi. Half-demon warrior who fights for the Pandavas. Karna uses his divine weapon on Ghatotkacha, saving Arjuna."
+    },
+    {
+      "canonical": "Hidimbi",
+      "category": "ally",
+      "variants": ["Hidimba", "Hidimbaa"],
+      "aliases": [],
+      "description": "Rakshasi (demoness) who falls in love with Bhima. Mother of Ghatotkacha."
+    },
+
+    {
+      "canonical": "Pandavas",
+      "category": "group",
+      "variants": ["Pandava", "Paandavas", "Pandav", "Pondavas", "Pondovas"],
+      "aliases": [],
+      "description": "The five sons of Pandu: Yudhishthira, Bhima, Arjuna, Nakula, and Sahadeva. Protagonists of the Mahabharata."
+    },
+    {
+      "canonical": "Kauravas",
+      "category": "group",
+      "variants": ["Kaurava", "Kaurav", "Kourava", "Kouravas"],
+      "aliases": [],
+      "description": "The hundred sons of Dhritarashtra, led by Duryodhana. Antagonists of the Mahabharata."
+    },
+
+    {
+      "canonical": "Hastinapura",
+      "category": "place",
+      "variants": ["Hastinapur", "Hastinapoor"],
+      "aliases": [],
+      "description": "Capital city of the Kuru kingdom. The throne both the Pandavas and Kauravas claim."
+    },
+    {
+      "canonical": "Indraprastha",
+      "category": "place",
+      "variants": ["Indraprasth", "Indraprashtha"],
+      "aliases": [],
+      "description": "City built by the Pandavas on barren land given to them by Dhritarashtra. Transformed into a magnificent capital with the help of the demon Maya."
+    },
+    {
+      "canonical": "Kurukshetra",
+      "category": "place",
+      "variants": ["Kurukshtra", "Kurukshethra"],
+      "aliases": ["Dharmakshetra"],
+      "description": "The battlefield where the great war takes place. Eighteen days of combat between the Pandava and Kaurava armies."
+    },
+    {
+      "canonical": "Panchala",
+      "category": "place",
+      "variants": ["Panchal"],
+      "aliases": [],
+      "description": "Kingdom of King Drupada. Homeland of Draupadi."
+    },
+    {
+      "canonical": "Gandhara",
+      "category": "place",
+      "variants": ["Gandhar"],
+      "aliases": [],
+      "description": "Kingdom of Shakuni and Gandhari. Located in present-day Afghanistan/Pakistan."
+    },
+    {
+      "canonical": "Dwarka",
+      "category": "place",
+      "variants": ["Dwaraka", "Dwarika"],
+      "aliases": [],
+      "description": "Krishna's island kingdom on the western coast of India."
+    },
+
+    {
+      "canonical": "Dharma",
+      "category": "concept",
+      "variants": ["Dharm"],
+      "aliases": [],
+      "description": "Righteousness, duty, cosmic order. The central moral question of the Mahabharata — what is dharma when duties conflict?"
+    },
+    {
+      "canonical": "Adharma",
+      "category": "concept",
+      "variants": ["Adharm"],
+      "aliases": [],
+      "description": "The opposite of dharma. Unrighteousness, injustice."
+    },
+    {
+      "canonical": "Chakravyuha",
+      "category": "concept",
+      "variants": ["Chakravyuh", "Chakravyooha"],
+      "aliases": ["Padmavyuha"],
+      "description": "A complex rotating military formation shaped like a lotus or disc. Abhimanyu knew how to enter but not how to exit."
+    },
+    {
+      "canonical": "Bhagavad Gita",
+      "category": "concept",
+      "variants": ["Bhagavad Geeta", "Bhagwad Gita", "Bhagwat Geeta", "Gita", "Geeta"],
+      "aliases": ["The Gita"],
+      "description": "Sacred dialogue between Krishna and Arjuna on the battlefield. Krishna's teachings on duty, action, and devotion. Contained within the Mahabharata."
+    },
+    {
+      "canonical": "Swayamvara",
+      "category": "concept",
+      "variants": ["Swayamvar", "Svayamvara"],
+      "aliases": [],
+      "description": "A ceremony where a princess chooses her husband from assembled suitors, often through a contest of skill. Draupadi's swayamvara is a pivotal event."
+    },
+    {
+      "canonical": "Guru Dakshina",
+      "category": "concept",
+      "variants": ["Gurudakshina", "Guru Dakshna"],
+      "aliases": [],
+      "description": "The offering a student gives to their teacher after completing education. Drona's demand of Ekalavya's thumb is a famous example."
+    },
+    {
+      "canonical": "Dyuta",
+      "category": "concept",
+      "variants": ["Dyut"],
+      "aliases": ["The Dice Game"],
+      "description": "The rigged game of dice where Yudhishthira loses everything — his kingdom, his brothers, himself, and Draupadi. Engineered by Shakuni."
+    },
+
+    {
+      "canonical": "Dharma",
+      "category": "divine",
+      "variants": ["Dharm"],
+      "aliases": ["Yama", "Yamaraja"],
+      "description": "God of righteousness and cosmic order. Father of Yudhishthira. Also associated with Yama, god of death and justice."
+    },
+    {
+      "canonical": "Vayu",
+      "category": "divine",
+      "variants": ["Vaayu"],
+      "aliases": ["Pavana", "Marut"],
+      "description": "Wind god. Father of Bhima and also of Hanuman, making Bhima and Hanuman half-brothers."
+    },
+    {
+      "canonical": "Indra",
+      "category": "divine",
+      "variants": [],
+      "aliases": ["Shakra", "Devraj"],
+      "description": "King of the gods. Father of Arjuna. Gives Arjuna divine weapons during his exile in heaven."
+    },
+    {
+      "canonical": "Surya",
+      "category": "divine",
+      "variants": ["Soorya"],
+      "aliases": ["Aditya"],
+      "description": "Sun god. Father of Karna. Kunti invoked him before her marriage, giving birth to Karna whom she set adrift on the river."
+    },
+    {
+      "canonical": "Ashvini Kumaras",
+      "category": "divine",
+      "variants": ["Ashwini Kumars", "Ashvins", "Ashwins"],
+      "aliases": [],
+      "description": "Twin divine physicians and horsemen. Fathers of Nakula and Sahadeva through Madri."
+    },
+    {
+      "canonical": "Vishnu",
+      "category": "divine",
+      "variants": ["Vishno"],
+      "aliases": ["Narayana", "Hari"],
+      "description": "Supreme god, the preserver. Krishna is his eighth avatar. His presence runs through the Mahabharata as the guiding divine force."
+    },
+    {
+      "canonical": "Shiva",
+      "category": "divine",
+      "variants": ["Shiv", "Siva"],
+      "aliases": ["Mahadeva", "Pashupati", "Rudra"],
+      "description": "The destroyer. Gives Arjuna the Pashupatastra, the most powerful divine weapon, after Arjuna fights him disguised as a hunter."
+    },
+    {
+      "canonical": "Hanuman",
+      "category": "divine",
+      "variants": ["Hanumaan"],
+      "aliases": ["Bajrangbali", "Maruti"],
+      "description": "Son of Vayu, half-brother of Bhima. Sits on Arjuna's chariot flag during the war. Bhima encounters him in the forest without recognizing him."
+    }
+  ]
+}

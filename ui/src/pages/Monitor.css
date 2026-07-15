@@ -1,0 +1,265 @@
+/* --- Monitor page — failure-mode detection rollup --- */
+
+.monitor-page {
+  max-width: 800px;
+  padding: var(--space-6) var(--space-4);
+}
+
+.monitor-header {
+  margin-bottom: var(--space-6);
+}
+
+.monitor-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.monitor-header h1 {
+  margin: 0 0 var(--space-1);
+}
+
+.monitor-rescan {
+  flex-shrink: 0;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius);
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.monitor-rescan:hover:not(:disabled) {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.monitor-rescan:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.monitor-warning {
+  font-size: 0.8rem;
+  color: var(--color-warning);
+  margin: var(--space-2) 0 0;
+}
+
+.monitor-row-day-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.monitor-stale {
+  color: var(--color-warning);
+  font-size: 0.85rem;
+  cursor: default;
+}
+
+.monitor-subtitle {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* Detector summary cards */
+
+.monitor-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.monitor-card {
+  flex: 1 1 240px;
+  max-width: 320px;
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.monitor-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+
+.monitor-card-mode {
+  padding: 1px 8px;
+  border-radius: var(--radius);
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.monitor-card-version {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+.monitor-card-label {
+  margin: 0 0 var(--space-3);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.monitor-card-stats {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.monitor-card-count {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.monitor-card-count-label {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+/* Detector × session list — column count varies with the registry,
+   so grid-template-columns is set inline from the page component */
+
+.monitor-list-header {
+  display: grid;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  border-top: 1px solid var(--color-border);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.monitor-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.monitor-row {
+  display: grid;
+  align-items: center;
+  /* column-gap matches the header's spacing; row-gap is tight so the story
+     line (full-width second row) sits close under the badges, not 16px away */
+  column-gap: var(--space-4);
+  row-gap: var(--space-1);
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 0.1s;
+}
+
+.monitor-row:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
+.monitor-row:hover {
+  background: var(--color-accent-bg);
+}
+
+.monitor-row-day {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.monitor-row-day:hover {
+  text-decoration: underline;
+}
+
+.monitor-row-time,
+.monitor-row-length {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* Story line — full-width second row: what this recording holds, so a flag
+   row is recognizable by content, not just date. Compact (one line, ellipsis). */
+
+.monitor-row-story {
+  grid-column: 1 / -1;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Flag badges — flagged / scanned-clean / never-scanned are distinct states */
+
+.monitor-badge {
+  justify-self: start;
+  min-width: 28px;
+  padding: 1px 8px;
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-align: center;
+  cursor: default;
+}
+
+.monitor-badge--flagged {
+  background: rgba(184, 145, 60, 0.18);
+  color: var(--color-warning);
+  font-weight: 600;
+}
+
+.monitor-badge--clean {
+  color: var(--color-text-muted);
+}
+
+.monitor-badge--unscanned {
+  color: var(--color-text-muted);
+  opacity: 0.4;
+}
+
+/* Empty state */
+
+.monitor-empty {
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+}
+
+.monitor-empty h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.monitor-name-banner {
+  margin: 0.4rem 0 0;
+  font-size: 0.9rem;
+}
+
+.monitor-name-banner a {
+  display: inline-block;
+  background: #fff6e6;
+  border: 1px solid #e0b25a;
+  border-radius: 8px;
+  padding: 0.3rem 0.8rem;
+  color: #8a5a00;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.monitor-name-banner a:hover {
+  background: #ffedcc;
+}

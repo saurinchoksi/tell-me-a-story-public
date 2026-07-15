@@ -1,0 +1,11 @@
+[project]
+name = "tell-me-a-story"
+version = "0.1.0"
+description = "Local story capture and organization pipeline"
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: marks tests as slow (run with 'pytest -m slow' or skip with 'pytest -m \"not slow\"')",
+]
+testpaths = ["tests"]
+pythonpath = [".", "src"]

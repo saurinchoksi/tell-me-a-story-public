@@ -1,0 +1,51 @@
+.confirm-bar {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  z-index: 10;
+}
+
+.confirm-bar-summary {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.confirm-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.confirm-bar-save {
+  padding: var(--space-2) var(--space-6);
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.confirm-bar-save:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.confirm-bar-save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.confirm-bar-save--success {
+  background: var(--color-success);
+}
+
+.confirm-bar-error {
+  font-size: 0.85rem;
+  color: var(--color-error);
+}

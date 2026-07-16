@@ -181,8 +181,14 @@
 }
 .np-accept { border-color: var(--np-done) !important; color: var(--np-done) !important; font-weight: 600; }
 .np-accept:hover { background: #f0faf5; }
-.np-tail { border-color: var(--np-accent) !important; color: var(--np-accent) !important; font-weight: 600; }
-.np-tail:hover { background: #faf6f7 !important; }
+/* Deliberately plain — do not give this button an outline or a bold weight. It is a one-way
+   ACTION, not a toggle: markTail() moves the selection to the head, so a marked tail can never
+   BE the selected word and this button can never show an "on" state. Outlined + bold is the
+   vocabulary of "this option is currently selected", so any emphasis here reads as permanently
+   engaged (it did, and cost a real hunt for a state that does not exist). The confirmation the
+   emphasis seemed to promise lives on the HEAD card, which lists every word it absorbed with a
+   ⊖ release beside each. Hover comes from `.np-actions button:hover`. */
+.np-tail { color: var(--np-accent) !important; }
 .np-notaname { color: var(--np-muted) !important; }
 .np-clear { color: var(--np-accent) !important; }
 .np-actions button:hover { background: var(--np-bg); }

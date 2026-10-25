@@ -12,6 +12,9 @@ os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
 
 import subprocess
 import tempfile
+import wave
+
+import numpy as np
 import torch
 from pyannote.audio import Pipeline
 from pyannote.audio.pipelines.utils.hook import ProgressHook
@@ -72,6 +75,26 @@ def prepare_audio_for_diarization(audio_path: str) -> str:
     return temp_wav.name
 
 
+def load_wav(wav_path: str) -> dict:
+    """Read a 16-bit PCM WAV into pyannote's in-memory audio form.
+
+    Returns {"waveform": (channel, time) float32 tensor in [-1, 1], "sample_rate": int}.
+    pyannote (and torchaudio.load) decode files through torchcodec, which can't load
+    against Homebrew's FFmpeg 9 (it supports 4-8), so audio goes to the models
+    in memory: the ffmpeg CLI converts, the stdlib wave module reads.
+    """
+    with wave.open(wav_path, "rb") as w:
+        if w.getsampwidth() != 2:
+            raise ValueError(f"Expected 16-bit PCM WAV, got {8 * w.getsampwidth()}-bit: {wav_path}")
+        num_channels = w.getnchannels()
+        sample_rate = w.getframerate()
+        frames = w.readframes(w.getnframes())
+
+    samples = np.frombuffer(frames, dtype="<i2").astype(np.float32) / 32768.0
+    waveform = torch.from_numpy(samples.reshape(-1, num_channels).T.copy())
+    return {"waveform": waveform, "sample_rate": sample_rate}
+
+
 def diarize(audio_path: str, model: Pipeline = None, num_speakers: int = None) -> dict:
     """Run speaker diarization on an audio file.
 
@@ -93,9 +116,12 @@ def diarize(audio_path: str, model: Pipeline = None, num_speakers: int = None) -
     wav_path = prepare_audio_for_diarization(audio_path)
 
     try:
+        # Hand pyannote the audio in memory: given a path it decodes through torchcodec
+        audio = load_wav(wav_path)
+
         # Run diarization with progress feedback
         with ProgressHook() as hook:
-            output = model(wav_path, hook=hook, num_speakers=num_speakers)
+            output = model(audio, hook=hook, num_speakers=num_speakers)
 
         # Extract segments using exclusive mode (one speaker at a time)
         # This simplifies alignment with transcription timestamps

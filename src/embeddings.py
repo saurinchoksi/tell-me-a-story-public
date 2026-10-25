@@ -14,7 +14,6 @@ import os
 
 import numpy as np
 import torch
-import torchaudio
 
 # PyTorch 2.6+ safe globals for pyannote model loading
 from pyannote.audio.core.task import Specifications, Problem, Resolution, Scope
@@ -22,7 +21,7 @@ torch.serialization.add_safe_globals([Specifications, Problem, Resolution, Scope
 
 from pyannote.audio.pipelines.speaker_verification import PretrainedSpeakerEmbedding
 
-from diarize import prepare_audio_for_diarization
+from diarize import load_wav, prepare_audio_for_diarization
 
 logger = logging.getLogger(__name__)
 
@@ -56,7 +55,7 @@ def extract_speaker_embeddings(
 ) -> dict:
     """Extract per-speaker embeddings from diarized audio.
 
-    Converts audio to 16kHz mono WAV (reusing diarize.py's helper),
+    Converts audio to 16kHz mono WAV and reads it (reusing diarize.py's helpers),
     groups diarization segments by speaker, embeds each usable segment,
     and produces one averaged embedding vector per speaker.
 
@@ -83,7 +82,9 @@ def extract_speaker_embeddings(
     wav_path = prepare_audio_for_diarization(audio_path)
 
     try:
-        waveform, sr = torchaudio.load(wav_path)
+        # Read in memory, not torchaudio.load: that decodes through torchcodec (see load_wav)
+        audio = load_wav(wav_path)
+        waveform, sr = audio["waveform"], audio["sample_rate"]
 
         # Group segments by speaker
         speaker_segments = {}

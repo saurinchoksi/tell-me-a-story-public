@@ -50,14 +50,14 @@ def _mock_model(dim=256):
 # --- extract_speaker_embeddings tests ---
 
 @patch("embeddings.prepare_audio_for_diarization")
-@patch("embeddings.torchaudio.load")
+@patch("embeddings.load_wav")
 def test_two_speakers_both_get_vectors(mock_load, mock_prepare):
     """Two speakers with usable segments → both present in result."""
     import torch
 
     mock_prepare.return_value = "/tmp/fake.wav"
     # 10 seconds of audio at 16kHz
-    mock_load.return_value = (torch.randn(1, 160000), 16000)
+    mock_load.return_value = {"waveform": torch.randn(1, 160000), "sample_rate": 16000}
 
     diarization = _diarization([
         _segment("SPEAKER_00", 0.0, 3.0),
@@ -77,13 +77,13 @@ def test_two_speakers_both_get_vectors(mock_load, mock_prepare):
 
 
 @patch("embeddings.prepare_audio_for_diarization")
-@patch("embeddings.torchaudio.load")
+@patch("embeddings.load_wav")
 def test_short_segments_excluded(mock_load, mock_prepare):
     """Speaker with all segments < 0.5s → excluded from result."""
     import torch
 
     mock_prepare.return_value = "/tmp/fake.wav"
-    mock_load.return_value = (torch.randn(1, 160000), 16000)
+    mock_load.return_value = {"waveform": torch.randn(1, 160000), "sample_rate": 16000}
 
     diarization = _diarization([
         _segment("SPEAKER_00", 0.0, 3.0),   # usable
@@ -101,13 +101,13 @@ def test_short_segments_excluded(mock_load, mock_prepare):
 
 
 @patch("embeddings.prepare_audio_for_diarization")
-@patch("embeddings.torchaudio.load")
+@patch("embeddings.load_wav")
 def test_empty_diarization(mock_load, mock_prepare):
     """Empty diarization → empty speakers dict."""
     import torch
 
     mock_prepare.return_value = "/tmp/fake.wav"
-    mock_load.return_value = (torch.randn(1, 160000), 16000)
+    mock_load.return_value = {"waveform": torch.randn(1, 160000), "sample_rate": 16000}
 
     diarization = _diarization([])
     model = _mock_model()
@@ -119,13 +119,13 @@ def test_empty_diarization(mock_load, mock_prepare):
 
 
 @patch("embeddings.prepare_audio_for_diarization")
-@patch("embeddings.torchaudio.load")
+@patch("embeddings.load_wav")
 def test_single_segment_per_speaker(mock_load, mock_prepare):
     """Single segment per speaker → valid embedding."""
     import torch
 
     mock_prepare.return_value = "/tmp/fake.wav"
-    mock_load.return_value = (torch.randn(1, 160000), 16000)
+    mock_load.return_value = {"waveform": torch.randn(1, 160000), "sample_rate": 16000}
 
     diarization = _diarization([
         _segment("SPEAKER_00", 1.0, 4.0),
@@ -143,13 +143,13 @@ def test_single_segment_per_speaker(mock_load, mock_prepare):
 
 
 @patch("embeddings.prepare_audio_for_diarization")
-@patch("embeddings.torchaudio.load")
+@patch("embeddings.load_wav")
 def test_nan_in_model_output_skipped(mock_load, mock_prepare):
     """NaN in model output → that segment is skipped gracefully."""
     import torch
 
     mock_prepare.return_value = "/tmp/fake.wav"
-    mock_load.return_value = (torch.randn(1, 160000), 16000)
+    mock_load.return_value = {"waveform": torch.randn(1, 160000), "sample_rate": 16000}
 
     call_count = [0]
 
@@ -180,13 +180,13 @@ def test_nan_in_model_output_skipped(mock_load, mock_prepare):
 
 
 @patch("embeddings.prepare_audio_for_diarization")
-@patch("embeddings.torchaudio.load")
+@patch("embeddings.load_wav")
 def test_vectors_are_plain_lists(mock_load, mock_prepare):
     """Output vectors must be plain Python lists, not numpy arrays."""
     import torch
 
     mock_prepare.return_value = "/tmp/fake.wav"
-    mock_load.return_value = (torch.randn(1, 160000), 16000)
+    mock_load.return_value = {"waveform": torch.randn(1, 160000), "sample_rate": 16000}
 
     diarization = _diarization([
         _segment("SPEAKER_00", 0.0, 3.0),
@@ -203,13 +203,13 @@ def test_vectors_are_plain_lists(mock_load, mock_prepare):
 
 
 @patch("embeddings.prepare_audio_for_diarization")
-@patch("embeddings.torchaudio.load")
+@patch("embeddings.load_wav")
 def test_vectors_are_256_dim(mock_load, mock_prepare):
     """Each speaker vector must be exactly 256-dimensional."""
     import torch
 
     mock_prepare.return_value = "/tmp/fake.wav"
-    mock_load.return_value = (torch.randn(1, 160000), 16000)
+    mock_load.return_value = {"waveform": torch.randn(1, 160000), "sample_rate": 16000}
 
     diarization = _diarization([
         _segment("SPEAKER_00", 0.0, 3.0),
@@ -226,13 +226,13 @@ def test_vectors_are_256_dim(mock_load, mock_prepare):
 
 
 @patch("embeddings.prepare_audio_for_diarization")
-@patch("embeddings.torchaudio.load")
+@patch("embeddings.load_wav")
 def test_vectors_are_finite(mock_load, mock_prepare):
     """All values in output vectors must be finite floats."""
     import torch
 
     mock_prepare.return_value = "/tmp/fake.wav"
-    mock_load.return_value = (torch.randn(1, 160000), 16000)
+    mock_load.return_value = {"waveform": torch.randn(1, 160000), "sample_rate": 16000}
 
     diarization = _diarization([
         _segment("SPEAKER_00", 0.0, 3.0),
@@ -248,13 +248,13 @@ def test_vectors_are_finite(mock_load, mock_prepare):
 
 
 @patch("embeddings.prepare_audio_for_diarization")
-@patch("embeddings.torchaudio.load")
+@patch("embeddings.load_wav")
 def test_output_schema_keys(mock_load, mock_prepare):
     """Output has _generator_version, _dimension, speakers keys."""
     import torch
 
     mock_prepare.return_value = "/tmp/fake.wav"
-    mock_load.return_value = (torch.randn(1, 160000), 16000)
+    mock_load.return_value = {"waveform": torch.randn(1, 160000), "sample_rate": 16000}
 
     diarization = _diarization([
         _segment("SPEAKER_00", 0.0, 3.0),
@@ -271,13 +271,13 @@ def test_output_schema_keys(mock_load, mock_prepare):
 
 
 @patch("embeddings.prepare_audio_for_diarization")
-@patch("embeddings.torchaudio.load")
+@patch("embeddings.load_wav")
 def test_total_duration_includes_short_segments(mock_load, mock_prepare):
     """total_duration_s includes ALL segments, even ones too short to embed."""
     import torch
 
     mock_prepare.return_value = "/tmp/fake.wav"
-    mock_load.return_value = (torch.randn(1, 160000), 16000)
+    mock_load.return_value = {"waveform": torch.randn(1, 160000), "sample_rate": 16000}
 
     diarization = _diarization([
         _segment("SPEAKER_00", 0.0, 3.0),   # 3.0s, usable
@@ -296,13 +296,13 @@ def test_total_duration_includes_short_segments(mock_load, mock_prepare):
 
 
 @patch("embeddings.prepare_audio_for_diarization")
-@patch("embeddings.torchaudio.load")
+@patch("embeddings.load_wav")
 def test_temp_wav_cleaned_up_on_success(mock_load, mock_prepare):
     """Temp WAV is cleaned up after successful extraction."""
     import torch
 
     mock_prepare.return_value = "/tmp/fake.wav"
-    mock_load.return_value = (torch.randn(1, 160000), 16000)
+    mock_load.return_value = {"waveform": torch.randn(1, 160000), "sample_rate": 16000}
 
     diarization = _diarization([])
     model = _mock_model()
@@ -314,7 +314,7 @@ def test_temp_wav_cleaned_up_on_success(mock_load, mock_prepare):
 
 
 @patch("embeddings.prepare_audio_for_diarization")
-@patch("embeddings.torchaudio.load")
+@patch("embeddings.load_wav")
 def test_temp_wav_cleaned_up_on_error(mock_load, mock_prepare):
     """Temp WAV is cleaned up even if extraction fails."""
     mock_prepare.return_value = "/tmp/fake.wav"

@@ -71,8 +71,8 @@ def create_app(sessions_dir=None, profiles_path=None, detectors=None,
         roster_path: Path to the roster file (who exists — people/nicknames/aliases,
             the /roster page's store). Defaults to data/name_roster.json. Injectable
             so tests never touch the real gitignored roster.
-        home_canon_path: Path to the home cast (the family's registered characters,
-            TMAS-57). Defaults to data/home-canon.json. Injectable for tests.
+        home_canon_path: Path to the home cast (the family's registered
+            characters). Defaults to data/home-canon.json. Injectable for tests.
     """
     app = Flask(__name__)
     app.json = JsonSafeProvider(app)
@@ -92,7 +92,7 @@ def create_app(sessions_dir=None, profiles_path=None, detectors=None,
         home_canon_path = home_canon.DEFAULT_PATH
     app.config["HOME_CANON_PATH"] = Path(home_canon_path)
     if detectors is None:
-        # Re-bind the roster-reading detectors to this app's roster (TMAS-73);
+        # Re-bind the roster-reading detectors to this app's roster;
         # rationale in the docstring above. type(d) preserves any subclass.
         from detectors import DETECTORS
         from detectors.family_names import FamilyNameDetector

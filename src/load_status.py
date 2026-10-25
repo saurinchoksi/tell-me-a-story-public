@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Live status for the oldest-first churn (TMAS-80) — read-only, run from any terminal.
+"""Live status for the oldest-first churn (#16) — read-only, run from any terminal.
 
     python src/load_status.py             # print once
     python src/load_status.py --watch     # auto-refresh every 10s (Ctrl-C to stop)

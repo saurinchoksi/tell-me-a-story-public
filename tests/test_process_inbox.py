@@ -34,7 +34,7 @@ def _patch_dirs(stack, inbox_dir, sessions_dir):
 
 def _make_pipeline_result(embeddings=None, processing=()):
     """Build a mock pipeline result with _stats and _processing (matching real
-    run_pipeline output — the fixer summary reads _processing, TMAS-72)."""
+    run_pipeline output — the fixer summary reads _processing)."""
     return {
         "transcript_raw": {"segments": []},
         "transcript": {"segments": [], "_stats": {}, "_processing": list(processing)},
@@ -102,7 +102,7 @@ def test_process_inbox_init_and_pipeline_success(capsys):
 
 
 def test_process_inbox_says_what_fixers_did_and_didnt(capsys):
-    """TMAS-72: each session prints the fixer-stage ending (counts per fixer, NOT RUN
+    """ each session prints the fixer-stage ending (counts per fixer, NOT RUN
     with the reason, shadow reminder), and the run summary says loudly that family
     names were never checked — 'never ran' must not look like 'nothing found'."""
     with tempfile.TemporaryDirectory() as tmp:

@@ -11,7 +11,7 @@ import type { HomeCanon, Roster, RosterPerson } from '../types';
 import './Roster.css';
 
 /**
- * The roster page — the one deliberate place "who exists" gets edited (TMAS-56).
+ * The roster page — the one deliberate place "who exists" gets edited.
  *
  * Add-only by design: people (family or friend), nicknames (legitimate name forms —
  * correct as heard, matchable, correction targets of their own), and aliases (known
@@ -196,7 +196,7 @@ export default function RosterPage() {
         </div>
       </div>
 
-      {/* What registration actually triggers (TMAS-72) — before this, the fixer
+      {/* What registration actually triggers — before this, the fixer
           re-run lived in an undocumented CLI and nothing on this page said so. */}
       <div className="roster-hint">
         <h2>What happens after you register</h2>

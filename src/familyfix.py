@@ -70,9 +70,9 @@ def config_fingerprint(roster_path=None, home_path=None) -> str:
 
 
 def load_roster(roster_path=None):
-    """Compact mirror of the frozen detector's loader, extended for the TMAS-56 schema
-    (nicknames as FULL name forms; the frozen detector itself stays untouched until
-    TMAS-58). Returns (name_forms, canon_forms, code_to_names, alias_to_name):
+    """Compact mirror of the frozen detector's loader, extended for the nicknames
+    schema (nicknames as FULL name forms; the frozen detector itself stays untouched
+    until its loader amendment). Returns (name_forms, canon_forms, code_to_names, alias_to_name):
       name_forms     — every legitimate spelling: canonicals + nicknames (the correction
                        cast and the re-listen prompt)
       canon_forms    — {cleaned canonical or nickname} (correct-as-heard -> never a
@@ -126,7 +126,7 @@ def family_candidates(transcript: dict, roster, home_forms=frozenset()) -> list[
     the capitalization gate (checked AFTER matching, so lowercase homophones drop and
     capitalized common-word disguises survive). No dictionary gate, ever (M9a rule).
 
-    `home_forms` (TMAS-57 stage 1): cleaned canonicals of the family's OWN registered
+    `home_forms` (home canon stage 1): cleaned canonicals of the family's OWN registered
     characters — a correctly-spelled home character is never a candidate, however much
     it sounds like a real person (the story-character→real-person sound-alike class
     dies here)."""

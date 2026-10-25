@@ -8,7 +8,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-# Clone-is-the-instance (TMAS-73, settled): CLI modules hang their paths off
+# Clone-is-the-instance (settled): CLI modules hang their paths off
 # their own __file__ within this checkout — no env var, no --data-root flag, on
 # purpose. A blank or test instance is a fresh `git clone` (data/ contents,
 # sessions/, and inbox/ are gitignored, so a clone arrives empty); path

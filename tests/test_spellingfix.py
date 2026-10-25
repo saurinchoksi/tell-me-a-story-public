@@ -116,7 +116,7 @@ def test_groups_one_per_deviant_sharing_cluster(wordlist):
 
 
 def test_worldless_files_under_home_mixed_gets_none(wordlist):
-    """v1.2.0 (TMAS-57): a cluster unanimously OUTSIDE recognized story worlds files
+    """v1.2.0: a cluster unanimously OUTSIDE recognized story worlds files
     under 'Home' — the family's own canon is the ruling home for world-less clusters.
     A cluster genuinely SPANNING two recognized worlds still gets no home."""
     t = make_transcript([[(" Jammus", 0.0)], [(" Jameis", 1.0)]])   # no _stories

@@ -16,7 +16,7 @@
  *   G            — toggle silence gap filter
  *   Z            — toggle near-zero filter
  *   D            — toggle duplicates filter
- *   M            — toggle missed-speech spans on the waveform (TMAS-48)
+ *   M            — toggle missed-speech spans on the waveform
  *   Escape       — close modal/menu
  */
 

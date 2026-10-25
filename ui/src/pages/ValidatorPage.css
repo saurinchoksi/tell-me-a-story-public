@@ -168,7 +168,7 @@
   white-space: nowrap;
 }
 
-/* Hear-box (TMAS-75) — the ear-check row that appears with the stepper.
+/* Hear-box — the ear-check row that appears with the stepper.
    One line under the controls bar: span readout, "what I hear" text,
    verdict pills (reusing .btn--small). */
 .missed-hearbox {

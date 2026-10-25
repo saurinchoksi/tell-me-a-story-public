@@ -7,7 +7,7 @@ diarization inference. Speaker enrichment of transcripts lives in speaker.py.
 import os
 
 # Let any op unimplemented on Apple's Metal GPU (MPS) fall back to CPU instead of
-# crashing the run — must be set before torch is imported (TMAS-95: diarization on GPU).
+# crashing the run — must be set before torch is imported (#26: diarization on GPU).
 os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
 
 import subprocess
@@ -44,7 +44,7 @@ def load_diarization_model() -> Pipeline:
     # pyannote does NOT auto-use the GPU (unlike most libraries), so without this the
     # whole pipeline ran on CPU at ~real-time — ~52% of the pipeline's wall-clock. Moving
     # it to Apple's Metal GPU (MPS) is ~10-15x faster and, validated bit-identical to the
-    # CPU output across 4 sessions spanning 2-4 speakers (TMAS-95), changes nothing else:
+    # CPU output across 4 sessions spanning 2-4 speakers (#26), changes nothing else:
     # same speaker count, same segments, same per-speaker timings. Same weights and memory
     # footprint, so it fits the 8GB product target too. The device is freed in diarize()'s
     # finally block (MPS only reclaims on empty_cache / process exit).

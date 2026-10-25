@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Process inbox audio oldest-first, up to a limit — a resumable wrapper (TMAS-80).
+"""Process inbox audio oldest-first, up to a limit — a resumable wrapper (#16).
 
 `process_inbox.py` inits ALL inbox files, then pipelines each. A run killed partway
 therefore leaves sessions that were initialized but never pipelined, and a re-run
@@ -47,19 +47,19 @@ def _session_ids():
 
 def main():
     ap = argparse.ArgumentParser(
-        description="Process inbox audio oldest-first, resumable (TMAS-80)."
+        description="Process inbox audio oldest-first, resumable (#16)."
     )
     ap.add_argument("--limit", type=int, default=None,
                     help="stop after this many NEW sessions are created (default: all)")
     ap.add_argument("--dry-run", action="store_true",
                     help="list the oldest-first processing order and exit")
     ap.add_argument("--skip-monitor", action="store_true",
-                    help="skip the deprioritized Monitor detector pass (TMAS-64/80) — "
+                    help="skip the deprioritized Monitor detector pass (#13/#16) — "
                          "saves a second model load per session; calibration doesn't need it")
     ap.add_argument("--skip-name-fixers", action="store_true",
                     help="defer the name fixers (namefix/familyfix/spellingfix) to a later "
                          "fix_session batch — skips the expensive per-name re-listens so the "
-                         "churn finishes transcripts fast (transcripts-first, TMAS-95)")
+                         "churn finishes transcripts fast (transcripts-first, #26)")
     args = ap.parse_args()
 
     dated = oldest_first()
@@ -75,7 +75,7 @@ def main():
         print("\n(dry run — nothing processed)")
         return
 
-    # FINISH-AND-FREE (TMAS-80): each session runs in its OWN short-lived subprocess
+    # FINISH-AND-FREE (#16): each session runs in its OWN short-lived subprocess
     # (process_inbox.py --file), so the OS reclaims all of its model/GPU memory the moment
     # it exits. This Mac only reliably frees GPU memory on process exit, so the earlier
     # single long-lived loop accumulated it session after session until the machine swapped
@@ -85,7 +85,7 @@ def main():
     # (diarize.py) — load in-process in run_pipeline and are NOT wrapped, so their memory is
     # exactly what piled up. Wrapping the session frees all of it (both models + heap) in one
     # exit — a catch-all. (Deeper fix: wrap transcribe/diarize in run_model too, helping every
-    # run_pipeline caller — TMAS-94; done here at the session grain for now, lower-risk.) We
+    # run_pipeline caller; done here at the session grain for now, lower-risk.) We
     # use subprocess.run of the CLI, not run_model, because run_model marshals a picklable
     # RETURN value via a Queue — here we run process_inbox for its side effects and want its
     # live stdout to keep flowing into the churn log. The parent stays light (no mlx import)

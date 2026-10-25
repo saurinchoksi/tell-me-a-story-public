@@ -1,5 +1,5 @@
 /**
- * SessionRead — the plain reading view for a session (TMAS-71).
+ * SessionRead — the plain reading view for a session.
  *
  * The default click-through from the Sessions list: read the story, play the
  * audio, see who said what. No axial-coding chips, no probability colors, no

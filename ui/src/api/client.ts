@@ -183,7 +183,7 @@ export async function scanAllDetections(): Promise<DetectionsRollup> {
   return fetchJSON<DetectionsRollup>('/api/detections/scan', { method: 'POST' });
 }
 
-// --- Missed speech (TMAS-48) ---
+// --- Missed speech ---
 
 /**
  * Missed-speech candidate spans for the validator waveform, computed live
@@ -196,7 +196,7 @@ export async function getMissedSpeech(sessionId: string): Promise<MissedSpeechDa
 }
 
 /**
- * Hear-box entries for a session's missed-speech candidates (TMAS-75) —
+ * Hear-box entries for a session's missed-speech candidates —
  * "what I hear" + verdict, keyed by candidate span. Human-authored sidecar
  * (missed-speech-verdicts.json); saving replaces the full array, like notes.
  */
@@ -371,7 +371,7 @@ export async function unruleName(
   });
 }
 
-// --- Name pass (the by-ear gold-key builder, TMAS-97) ---
+// --- Name pass (the by-ear gold-key builder, #4) ---
 
 import type { NamePassPayload, NameTruthFieldSave, NameTruthItem } from '../types';
 

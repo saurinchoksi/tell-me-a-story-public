@@ -22,7 +22,7 @@ heard alone is never an identity. All verdict endpoints key on gid.
         verdict history, undoable), `stale_sessions` (queues whose transcript changed
         since the fixers ran), and `family_fixer` (did the family side run — checked /
         skipped-with-reason / stale / unknown per session, plus the live family
-        question count, TMAS-72).
+        question count).
   POST /api/sessions/<id>/name-corrections/bless   {gid, canonical?, occurrences?}
         RECORD a yes. Whole-name: the ruling enters the world's Name Book (deterministic at
         the future apply pass) + the _blessed audit. Per-occurrence: audit only — a partial
@@ -99,7 +99,7 @@ def _is_stale(data: dict, transcript: dict | None) -> bool:
     """The queue's stamped transcript fingerprint vs the transcript as it is NOW. A stale
     queue's occurrence positions may have drifted — verdicts against it are refused.
 
-    One sanctioned mismatch is NOT staleness (TMAS-77): dictionary normalization (Pass 5)
+    One sanctioned mismatch is NOT staleness: dictionary normalization (Pass 5)
     runs AFTER the fixers stamp the queue and rewrites word tokens 1:1 in place
     (apply_corrections — positions stable, each corrected word keeping its `_original`).
     The fixers truthfully stamped the pre-dictionary words at the very positions the
@@ -166,7 +166,7 @@ def _annotate_frequency(transcript: dict | None, groups: list) -> None:
     audit at verdict time), so every question — old queues included — carries it with
     no re-runs. Adds `n_heard_in_transcript` / `n_suggested_in_transcript` per group.
 
-    Frequency honesty for the dictionary-corrected case (TMAS-79): when the dictionary
+    Frequency honesty for the dictionary-corrected case: when the dictionary
     rewrote every heard spot in place, `n_heard_in_transcript` reads 0 purely because the
     live tokens no longer say the heard form — a bare "0×" would contradict a card whose
     own spots were the heard word. Also expose `n_heard_dictionary_corrected`: how many of
@@ -199,7 +199,7 @@ def _annotate_frequency(transcript: dict | None, groups: list) -> None:
 
 
 def _dictionary_corrected(word: dict, token: str) -> bool:
-    """The one "was this spot rewritten by the dictionary?" test (TMAS-79), shared by
+    """The one "was this spot rewritten by the dictionary?" test, shared by
     _enrich_occurrences (the display marker) and _annotate_frequency (the honest count)
     so the two can never drift: the live word keeps a pre-rewrite `_original` whose
     clean form equals the occurrence's recorded heard token, the surface now differs,
@@ -222,10 +222,10 @@ def _enrich_occurrences(transcript: dict | None, groups: list) -> None:
     of truth the offsets index into) so the reviewer sees the word in context. Adds
     `segment_text`, `word_offset`/`word_len` (char span of the judged word inside it).
 
-    Also annotates the dictionary-corrected spot (TMAS-79). The opt-in dictionary pass
+    Also annotates the dictionary-corrected spot. The opt-in dictionary pass
     (Pass 5, --library) can rewrite the very token a question points at, in place, AFTER
     the fixer stamped the queue (apply_corrections keeps each corrected word's `_original`
-    = its pre-rewrite stripped token). Since TMAS-77 that queue no longer reads stale, so
+    = its pre-rewrite stripped token). Since the staleness fix that queue no longer reads stale, so
     the card is live — but its highlight shows the ALREADY-CORRECTED surface and the heard
     form counts 0, a card contradicting its own premise. When the live word at the spot
     carries an `_original` that cleans to this occurrence's recorded heard token and the
@@ -288,7 +288,7 @@ def _rollup_add(rollup: dict, g: dict, session_id: str, stale: bool) -> None:
                                          + g["n_heard_in_transcript"])
         slot["n_suggested_in_transcript"] = (slot.get("n_suggested_in_transcript", 0)
                                              + g["n_suggested_in_transcript"])
-        # legitimately optional, not a silent fallback: a pre-TMAS-79 verdict snapshot
+        # legitimately optional, not a silent fallback: an older verdict snapshot
         # (restorable via unrule) carries the two older frequency fields but not this
         # one, and with the transcript unavailable nothing recomputes it — 0 is honest
         slot["n_heard_dictionary_corrected"] = (
@@ -344,7 +344,7 @@ def name_corrections_rollup():
     ruled: list = []
     stale_sessions: list = []
     n_live = n_yes = n_no = n_spot = 0
-    # Did the family side run? (TMAS-72) — per session: checked (a metadata entry with
+    # Did the family side run? — per session: checked (a metadata entry with
     # no status), skipped (with reason), stale (the record — ran or skipped — is for an
     # older transcript), or unknown (no queue file / no family entry: never stamped).
     # `questions` counts LIVE family cards on non-stale sessions, deduped the way the
@@ -359,7 +359,7 @@ def name_corrections_rollup():
                 continue
             data = _read_pending(entry)
             if data is None:
-                # a processed session the fixers never stamped (pre-TMAS-72 sessions,
+                # a processed session the fixers never stamped (older sessions,
                 # or a pipeline that died before any queue write) — these being
                 # invisible was the original hole, so they count as unknown
                 if (entry / "transcript-rich.json").exists():

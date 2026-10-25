@@ -1,5 +1,5 @@
 /**
- * NamePassPage — build a per-session gold name key by ear, Opus-assisted (TMAS-97).
+ * NamePassPage — build a per-session gold name key by ear, Opus-assisted (#4).
  *
  * The transcript reads clean, with Opus's best-guess names shown IN PLACE. Clicking a
  * word plays the audio from there and SELECTS it (never writes); every action is on the right:
@@ -142,7 +142,7 @@ export default function NamePassPage() {
   //           'york city'), which keeps its render and leaves its head out of `phraseHeads`.
   //   TAIL    a word HE marked "part of the name before this" (scope 'tail'). Any length,
   //           and it reaches heads no sweep could ever card: the head of "you dished there."
-  //           -> Yudhishthira is the function word "you" (TMAS-101).
+  //           -> Yudhishthira is the function word "you" (#5).
   //
   // A marked tail walks BACK past anything already absorbed, so a span is always a
   // contiguous run of words — mark the 2nd and 3rd words of a three-word name and both land
@@ -324,7 +324,7 @@ export default function NamePassPage() {
   // Rule ALL occurrences of a spelling (the item's true_spelling + provenance).
   //
   // A spelling with no category is `unjudged` — the scorer drops it and the ear-work counts
-  // for nothing (TMAS-102). So when he accepts a DRAFT, the draft's name-kind rides along —
+  // for nothing. So when he accepts a DRAFT, the draft's name-kind rides along —
   // but only to fill a blank: a category he set himself is never overwritten, and the
   // dropdown can still change it afterwards. His ear stays the gate; this only decides what
   // an un-touched default lands as, countable instead of uncountable.
@@ -332,7 +332,7 @@ export default function NamePassPage() {
     (cleaned: string, value: string) => {
       // A spelling on a NOT-A-NAME is contradictory — "not a name" means leave this word
       // alone — and both the render and the scorer discard it. It used to be accepted and
-      // silently thrown away, which cost him the "Jai Sri Krishna" blessing (TMAS-103). The
+      // silently thrown away, which cost him the "Jai Sri Krishna" blessing. The
       // box is disabled for these; this refuses the write even if something else reaches it.
       if (keyState[cleaned]?.category === 'not-a-name') return;
       const provenance = value ? provenanceFor(cleaned, value) : '';
@@ -351,7 +351,7 @@ export default function NamePassPage() {
   // punctuation. On a NOT-A-NAME item it is the true SPEECH here: "not a name" means leave
   // this word alone, so a NAME ruling there would contradict it. He heard "Cheshi Kresha
   // Martie" = "Jai Sri Krishna" — the words are true, the tokens are not names, and that is
-  // exactly how the Goodnight key already records the same blessing (TMAS-103).
+  // exactly how the Goodnight key already records the same blessing.
   const scopeForOverride = useCallback(
     (cleaned: string) => (keyState[cleaned]?.category === 'not-a-name' ? 'speech' : 'name'),
     [keyState],
@@ -374,7 +374,7 @@ export default function NamePassPage() {
   // Mark this word as part of the name that starts BEFORE it (scope 'tail'). Whisper splits
   // a name across several word-tokens — "you dished there." is Yudhishthira — and without
   // this the key could only rule the first of them, so a fixer that wrote the name there and
-  // left the leftovers standing scored FIXED (TMAS-101).
+  // left the leftovers standing scored FIXED (#5).
   //
   // The word vanishes into its head's span, so we select the head: that is where the name
   // gets typed, and it is the only way back to release a mis-tap.
@@ -538,7 +538,7 @@ export default function NamePassPage() {
     for (const c of remainingSuggested) {
       items[c] = { true_spelling: suggestions[c].suggested, provenance: 'suggestion-confirmed' };
       // The draft's name-kind rides along, or this bulk-accept commits a pile of `unjudged`
-      // items the scorer silently drops — 18 of 49 on the 20260122 key (TMAS-102). Never
+      // items the scorer silently drops — 18 of 49 on the 20260122 key. Never
       // overwrites a category he set himself.
       const draftCat = suggestions[c].category;
       if (draftCat && !keyState[c]?.category) items[c].category = draftCat;
@@ -556,7 +556,7 @@ export default function NamePassPage() {
 
   // --- tallies ---
   // "Set" means COUNTABLE: a name is only really ruled once it has a category, because the
-  // scorer drops a name with no bucket (TMAS-102). Counting a bare true_spelling as "set"
+  // scorer drops a name with no bucket. Counting a bare true_spelling as "set"
   // over-reported progress and hid exactly the items that were about to be thrown away.
   const totalCandidates = payload?.cards.length ?? 0;
   const confirmed = (payload?.cards ?? []).filter((c) => keyState[c.cleaned]?.category).length;
@@ -648,7 +648,7 @@ export default function NamePassPage() {
                 // A category IS a decision, and now it shows as one.
                 //
                 // (2) But a spelling with NO bucket is `unjudged`: the scorer drops it and the
-                // ear-work scores as nothing (TMAS-102). Painting that green would be the
+                // ear-work scores as nothing. Painting that green would be the
                 // worse lie — the tool calling it done at the moment it's being discarded. So
                 // it renders ruled AND flagged, until it has the bucket that makes it count.
                 if (!keepRaw && item.true_spelling) text = item.true_spelling + punct;
@@ -689,7 +689,7 @@ export default function NamePassPage() {
     ?? (sel ? [{ occ_id: sel.occId, start: sel.start, context: sel.wordText, window: sel.window, m9_coded: false }] : []);
   // Not a name = leave this word alone, so a spelling here is thrown away by both the render
   // and the scorer. Block the box and route him to the per-spot one, which records the true
-  // WORDS at this spot as speech rather than as a name to fix (TMAS-103).
+  // WORDS at this spot as speech rather than as a name to fix.
   const selIsNota = selItem?.category === 'not-a-name';
   // The span he built at this word: the ones HE marked can be released; a phrase tail is the
   // sweep's own doing and is not his to undo here.

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Home canon — the family's OWN characters, a first-class world called "Home".
 
-The third registry (TMAS-57, grilled 2026-07-03, all calls Choksi's). The roster answers
+The third registry (grilled 2026-07-03, all calls Choksi's). The roster answers
 "which real people exist"; the story worlds' casts answer "which canon characters
 exist"; this answers "which of OUR characters exist" — Marley, the engines, the
 characters the family invents and keeps. Every cross-fire failure of the fixer era

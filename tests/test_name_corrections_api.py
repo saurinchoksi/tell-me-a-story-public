@@ -150,7 +150,7 @@ def test_rollup_empty_when_no_questions(client, tmp_path):
 
 
 def test_rollup_reports_family_fixer_status(client, tmp_path):
-    """TMAS-72: the rollup says whether the family side RAN per session — checked (a
+    """ the rollup says whether the family side RAN per session — checked (a
     metadata entry with no 'status'), skipped (with the reason), or unknown (queue
     files from before skip-recording AND sessions with no queue file at all) — plus
     the LIVE family question count."""
@@ -840,7 +840,7 @@ def test_frequency_signal_rides_on_views_and_verdicts(client, tmp_path):
     assert snap["n_suggested_in_transcript"] == 0
 
 
-# ------------------------- the dictionary-corrected spot (TMAS-79) -------------------------
+# ------------------------- the dictionary-corrected spot -------------------------
 def _make_session_with(tmp_path, transcript, pending):
     """A session with a caller-supplied transcript (these tests need `_original` trails)."""
     sdir = tmp_path / SID
@@ -876,7 +876,7 @@ def _arjun_group():
 
 
 def test_dictionary_corrected_spot_is_annotated(client, tmp_path):
-    """TMAS-79: a question filed against "Arjun" whose spot the dictionary then rewrote to
+    """ a question filed against "Arjun" whose spot the dictionary then rewrote to
     "Arjuna" is still LIVE (the position-preserving rewrite doesn't stale it) — so the card
     must say plainly what happened to the word. The occurrence carries the honest marker
     (`corrected_by_dictionary` + `now_reads`), and the heard count of 0 rides with an
@@ -950,7 +950,7 @@ def test_namefix_stage_correction_gets_no_marker(client, tmp_path):
 
 
 def test_rollup_survives_pre_tmas79_snapshot_fields(client, tmp_path):
-    """Robustness (review fix): a pre-TMAS-79 group (e.g. restored via unrule from an
+    """Robustness (review fix): an older group (e.g. restored via unrule from an
     old verdict snapshot) carries the two older frequency fields baked in but NOT
     `n_heard_dictionary_corrected`. With the transcript unavailable nothing recomputes
     them — the rollup must pass the old fields through without a KeyError; 0 is the

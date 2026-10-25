@@ -182,7 +182,7 @@ def test_groups_flow_into_shared_queue(roster_path, tmp_path):
     assert set(data["fixers"]) == {"namefix", "family"}
 
 
-# ------------------------------ nicknames (TMAS-56) ------------------------------
+# ------------------------------ nicknames ------------------------------
 @pytest.fixture
 def nickname_roster(tmp_path):
     """Marta has two nicknames: 'Marto' (shares her sound codes) and 'Kiki' (its own

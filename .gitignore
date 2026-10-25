@@ -18,7 +18,9 @@ sessions/debug/
 # IDE
 .vscode/
 .idea/
-.claude/
+.claude/*
+!.claude/skills/
+!.claude/skills/**
 
 # Claude context (personal)
 CLAUDE.md*.swp
@@ -40,7 +42,7 @@ data/name_roster.json
 # Family-name patterns for the publish scan (real-name variants) — schema in data/family-names.example.txt
 data/family-names.private.txt
 
-# Home canon — the family's own registered characters (TMAS-57) — schema in data/home-canon.example.json
+# Home canon — the family's own registered characters — schema in data/home-canon.example.json
 data/home-canon.json
 
 # The Name Book (human rulings; the family's book holds real names) — schema in data/name-book.example.json; synced to the private data repo
@@ -56,7 +58,7 @@ experiments/
 # EMP per-session HTML visuals (contain transcript text)
 emp/results/visuals/
 
-# TMAS-46 gap-classify sidecars (Whisper cache + by-ear "what I hear" notes = family speech)
+# Gap-classify sidecars (Whisper cache + by-ear "what I hear" notes = family speech)
 emp/results/gap-classify/*.json
 
 # Private real-name data (family roster); count.py reads it for M9a counting only, never committed
@@ -80,5 +82,5 @@ emp/results/worlds-bench/cold*
 data/worlds-cache/
 *.json.bak
 
-# TMAS-92 deep read — private family content, never in the public repo
+# Deep read — private family content, never in the public repo
 deepread/

@@ -1,6 +1,6 @@
 """Canonical missed-speech gap detection — pure interval logic + coverage rules.
 
-Extracted from emp/src/gap_analysis.py (TMAS-48) so there is exactly ONE
+Extracted from emp/src/gap_analysis.py so there is exactly ONE
 implementation of the missed-speech count: the EMP sweep CLI
 (emp/src/gap_analysis.py) and the API endpoint
 (GET /api/sessions/<id>/missed-speech) both import from here. The numbers the
@@ -13,7 +13,7 @@ granularity and includes BOTH transcribed-word segments AND pipeline-injected
 "[unintelligible]" placeholders (_source == "diarization_gap"): a placeholder
 is a visible, reviewable trace (a clickable line in the validator), so a region
 the pipeline already flagged that way is NOT a miss here. Sorting those
-placeholder segments into real-speech-vs-not is a separate job (TMAS-46).
+placeholder segments into real-speech-vs-not is a separate job.
 
 Pure data transforms over already-computed JSON — no ML, no file I/O, and
 nothing here ever modifies a transcript.
@@ -86,7 +86,7 @@ def covering_segments(transcript):
     spoke here, couldn't decode it." This is specifically the failure that is
     invisible to review, so a region the pipeline already flagged
     [unintelligible] is NOT a miss here. Deciding whether those [unintelligible]
-    segments hold real speech (vs noise) is a separate job — TMAS-46.
+    segments hold real speech (vs noise) is a separate job.
     """
     return [s for s in transcript["segments"] if s["end"] > s["start"]]
 

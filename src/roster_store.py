@@ -2,7 +2,7 @@
 """The roster store — deliberate, validated, ADD-ONLY writes to data/name_roster.json.
 
 The roster answers "who exists" (the Name Book answers "what did Saurin decide").
-Design settled in the TMAS-56 grill (2026-07-03, all calls Choksi's):
+Design settled in the roster grill (2026-07-03, all calls Choksi's):
 
 - A **person** has a canonical spelling and a `circle` ("family" | "friend") — real
   people beyond the household (the child's real-life friends) live in the same roster with

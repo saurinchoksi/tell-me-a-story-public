@@ -1,14 +1,14 @@
-"""Forced-alignment word realignment (TMAS-50 / TMAS-54).
+"""Forced-alignment word realignment.
 
 Whisper's per-word timestamps drift — concentrated on segment-initial words,
 which land too early in the pre-speech pause (the CrisperWhisper bug: the leading
 space is glued onto the next word, so the silence is parked onto it). This module
 re-derives word boundaries with torchaudio's MMS_FA CTC forced aligner, which the
-TMAS-50 experiment validated three independent ways (seg-initial onset 22%->66%,
+forced-alignment experiment validated three independent ways (seg-initial onset 22%->66%,
 re-ASR word-return 70%->90%, the "Okay," anchor 1.70s->2.08s).
 
 It aligns from the segment's trusted **text** (what forced alignment naturally
-takes), which also folds in the TMAS-53 / Mode-11 fix: `clean_transcript` prunes
+takes), which also folds in the Mode-11 fix: `clean_transcript` prunes
 zero-duration words from `words[]` but never from `text`, so re-deriving the word
 list from text brings the real dropped words back with proper durations.
 

@@ -33,7 +33,7 @@ n_sibling_spellings (garbles wobble across spellings; invented names hold steady
 group carries a stable `gid` — the identity every verdict endpoint and the UI key on
 (one heard word can carry two suggestions, so heard alone is not an identity).
 
-STAGE 2 of home canon (TMAS-57, Choksi's go 2026-07-03) lives here too:
+STAGE 2 of home canon (Choksi's go 2026-07-03) lives here too:
   - THE HOME EAR: on a story whose world the recognizer can't place — usually the
     family's own invented story, where this stage previously did NOTHING — the
     registered home cast (home_canon) rides in Whisper's ear instead of nothing, and
@@ -67,14 +67,14 @@ LEAD, WINDOW = 1.5, 2.0     # the E4/E5-tuned clip: [start-LEAD, start+WINDOW]
 TEMPORAL_TOL = 0.7          # max offset drift between blind word time and its re-decode
 PROMPT_CAP = 20            # names primed into Whisper's ear — the appositive listing's hard
                            # cap; the gate's confirmation vocabulary is built from the SAME
-                           # capped set (TMAS-67), so it can never confirm a name that was
+                           # capped set, so it can never confirm a name that was
                            # never in the ear
 GROUPS_LEAD = 6            # the validated shape leads with up to this many (the group names,
                            # the highest-value corrections)
 VERSION = "2.2.0"           # 2.x: SHADOW — labeled questions only, nothing ever applied
                             # 2.1.0: gid identity; the run no longer reads the Name Book
                             # 2.2.0: home-canon stage 2 — the home ear on unrecognized
-                            #        stories + the home guard everywhere (TMAS-57)
+                            #        stories + the home guard everywhere
 
 # The label vocabulary, in display order — the SINGLE source (the API and the CLI import
 # this; the UI keeps only display copy). Standing-ruling folds (covered by a yes / a no)
@@ -174,7 +174,7 @@ def _worlds_and_casts_worker(region_names: list[dict]) -> list[dict]:
 
 
 def cast_listing(cast: list[str]) -> tuple[str, list[str]]:
-    """The ONE shared cast-listing helper (TMAS-67) — the single place the validated
+    """The ONE shared cast-listing helper — the single place the validated
     appositive shape lives, so build_prompt and build_home_prompt can never drift apart
     again. The shape: the first up-to-GROUPS_LEAD names comma-joined (the group names,
     which carry the highest-value corrections), then ", and " + the remaining primed names
@@ -199,7 +199,7 @@ def build_prompt(world: str, cast: list[str]) -> str:
 
 def build_home_prompt(cast: list[str]) -> str:
     """The home-ear prompt (stage 2): the SAME validated appositive shape as build_prompt —
-    now via the shared `cast_listing` helper (TMAS-67), where it used a plain Oxford join
+    now via the shared `cast_listing` helper, where it used a plain Oxford join
     before — but with NO world clause (the world is unrecognized by definition, and naming
     one would invite Whisper to hallucinate around it). Just the family's own names in the
     ear."""
@@ -363,7 +363,7 @@ def run_namefix(transcript: dict, audio_path: str, worlds_and_casts=None,
 
     # home_forms (FULL registry) drives the guard — every registered spelling is protected
     # everywhere. The home ear's gate confirms only what actually rides in the ear, so its
-    # vocabulary is built from the SAME capped set as the prompt (TMAS-67).
+    # vocabulary is built from the SAME capped set as the prompt.
     home_forms = home_canon.canonical_forms(home_path)   # cleaned -> registered spelling
     home_prompt, home_gate_clean = "", {}
     if home_forms:
@@ -382,7 +382,7 @@ def run_namefix(transcript: dict, audio_path: str, worlds_and_casts=None,
                            "recognized_world": world, "n_names": len(r["names"]),
                            "n_candidates": len(r["cands"])})
         if not world:
-            # THE HOME EAR (stage 2, TMAS-57): a story the recognizer can't place is
+            # THE HOME EAR (stage 2): a story the recognizer can't place is
             # usually the family's OWN invented story — exactly where garbles of home
             # characters live. Instead of doing nothing, re-listen with the registered
             # home cast in Whisper's ear; questions come back under world "Home".
@@ -402,7 +402,7 @@ def run_namefix(transcript: dict, audio_path: str, worlds_and_casts=None,
         cast_clean = {clean(n): n for n in cast if clean(n)}        # FULL cast — the cast-member guard
         prompt = build_prompt(world, cast)
         _, primed = cast_listing(cast)                              # the names actually primed into the ear
-        gate_clean = {clean(n): n for n in primed if clean(n)}      # what the gate may confirm (== the prompt cap, TMAS-67)
+        gate_clean = {clean(n): n for n in primed if clean(n)}      # what the gate may confirm (== the prompt cap)
         for cand in r["cands"]:
             # the cast-member guard: a token already spelled exactly as a cast member is
             # never second-guessed (Thomas must not become Gordon on a neighbor's bleed)
@@ -430,7 +430,7 @@ def run_namefix(transcript: dict, audio_path: str, worlds_and_casts=None,
 
 FIXER = "namefix"   # this module's tag in the shared queue file
 
-# Plain words for the skip/error tokens recorded in queue metadata (TMAS-72) — the one
+# Plain words for the skip/error tokens recorded in queue metadata — the one
 # Python-side vocabulary; terminal surfaces print through it. The UI strip keeps a
 # mirrored TS map (NameReview.tsx) with a raw-token fallback for tokens it doesn't know.
 SKIP_REASON_COPY = {
@@ -454,7 +454,7 @@ def write_queue(session_dir: Path, fixer: str, groups: list, transcript: dict,
     replaces only that fixer's groups and leaves the others standing. The `_blessed`/
     `_rejected` audit lists are human history — ALWAYS carried over.
 
-    `skipped_reason` records a fixer that DIDN'T run (TMAS-72: "checked, nothing found"
+    `skipped_reason` records a fixer that DIDN'T run ("checked, nothing found"
     and "never ran" must stay distinguishable at the queue, not just in _processing):
     the fixer's metadata entry becomes {"status": "skipped", "reason": ...} and its
     prior same-fingerprint groups are left standing — they were computed against this
@@ -540,7 +540,7 @@ def write_pending(session_dir: Path, result: dict, transcript: dict,
 def write_skip(session_dir: Path, fixer: str, version: str, transcript: dict,
                reason: str) -> Path:
     """Record that a fixer DIDN'T run this time — a skip ("no_roster", "no_audio_path",
-    "no_stories") or a failed run ("error"). The TMAS-72 trace, one call for every
+    "no_stories") or a failed run ("error"). The didn't-run trace, one call for every
     site; semantics (kept groups, surviving ran records) live in write_queue."""
     return write_queue(session_dir, fixer, [], transcript, version, "",
                        skipped_reason=reason)

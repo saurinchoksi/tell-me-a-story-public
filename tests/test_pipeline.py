@@ -370,7 +370,7 @@ def test_pipeline_stats_structure():
     for word in fake_transcript["segments"][0]["words"]:
         word["_speaker"] = {"label": "SPEAKER_00"}
     # A gap/unassigned word carries a null label; _stats.speakers must count
-    # only real speakers, not the null (regression test for TMAS-41).
+    # only real speakers, not the null (regression test).
     fake_transcript["segments"][0]["words"][0]["_speaker"] = {"label": None}
 
     enrichment_processing = [
@@ -424,7 +424,7 @@ def test_pipeline_processing_stage_order():
     ]
 
 
-# --- --re-enrich guard tests (TMAS-105) ---
+# --- --re-enrich guard tests ---
 
 def test_guard_re_enrich_refuses_coded_session(tmp_path):
     """A session with axial-labels.json refuses --re-enrich, naming the session and the risk."""

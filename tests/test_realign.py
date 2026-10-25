@@ -1,7 +1,7 @@
-"""Unit tests for src/realign.py (TMAS-54).
+"""Unit tests for src/realign.py.
 
 The acoustic alignment itself (torchaudio MMS_FA) is validated separately in the
-TMAS-50 experiment; here we pin the *logic* — healthy realign vs M11 rescue vs
+forced-alignment experiment; here we pin the *logic* — healthy realign vs M11 rescue vs
 guard, and the structural invariants (ids/text/count/order preserved, envelope
 expands outward only) — by mocking the alignment step so no model is loaded.
 """

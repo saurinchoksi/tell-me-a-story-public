@@ -14,7 +14,7 @@ A candidate is a stretch where diarization heard a voice but the transcript
 has NO segment of any kind — no transcribed line, not even an
 [unintelligible] placeholder (the coverage rule lives in src/gaps.py).
 
-GET/POST /api/sessions/<id>/missed-speech/hearings (TMAS-75) read and write
+GET/POST /api/sessions/<id>/missed-speech/hearings read and write
 missed-speech-verdicts.json — the per-session hear-box sidecar (the ear-check
 convention: every listening probe gets a "what I hear" box + a verdict; named
 like name-verdicts.json, the other human-rulings file — NOT to be confused
@@ -111,7 +111,7 @@ def get_missed_speech(session_id: str):
     return jsonify({"candidates": candidates, "min_gap": min_gap})
 
 
-# The four things an ear can conclude about a candidate span (TMAS-75):
+# The four things an ear can conclude about a candidate span:
 # speech the transcript truly missed; noise adjacent to a hallucinated
 # stretch; the uncovered tail of a partially captured word (Choksi's
 # "Wowwwww" case); or nothing there at all. Mirrored in the HearingVerdict

@@ -80,19 +80,19 @@ OCC_DEFAULT = {"true_name": "", "scope": "", "kind": ""}
 #            "dished there." standing scores FIXED for producing "Yudhishthira dished
 #            there." A tail carries no true_name — it hands its token to the head's span,
 #            so the whole span must READ the name to pass, leftovers and all. Ruled by
-#            Choksi 2026-07-14 (TMAS-101) after he heard the split by ear mid-pass.
+#            Choksi 2026-07-14 (#5) after he heard the split by ear mid-pass.
 #   ""       Unstamped: score_transform.py infers (bracketed/quoted -> speech, else name)
 #            and PRINTS the inference. Stamp anything the inference gets wrong. A tail is
 #            never inferred — nothing in the text of a spot says it belongs to its
 #            neighbour; only the ear knows.
-# Ruled by Choksi 2026-07-13 (TMAS-100) after the scorer surfaced the two jobs sharing
+# Ruled by Choksi 2026-07-13 after the scorer surfaced the two jobs sharing
 # one field; the 15 speech spots in the 7 keys are stamped.
 OCC_SCOPES = ("name", "speech", "tail")
 # provenance records HOW true_spelling got here, so a draft-assisted key stays honest
 # about itself: "ear-cold" (typed with no suggestion), "suggestion-confirmed" (an Opus
 # draft the ear let stand), "ear-corrected" (an Opus draft the ear overrode). The ruler
 # still IS true_spelling — provenance only lets a later LLM-method score weight or set
-# aside the confirmed-from-draft ones (TMAS-97 refinement).
+# aside the confirmed-from-draft ones (#4 refinement).
 
 # Every unflagged proper name is swept in automatically (see proper_name_candidates):
 # a silent substitution of an improvised name onto a valid one (the made-up Jammus
@@ -171,7 +171,7 @@ def transcript_fingerprint(sid):
 
 def _save_notes_unlocked(sid, data):
     # PRIVATE — the unlocked half of the write pair. Every outside write goes through
-    # update_notes (the flock), so the lost-update race (TMAS-97) can't be reintroduced
+    # update_notes (the flock), so the lost-update race (#4) can't be reintroduced
     # by a future one-off script reaching for a bare save.
     # Stamp every save with the transcript state the human is marking against (settled
     # 2026-07-02: keys carry a transcript fingerprint; scorers warn on mismatch).
@@ -181,7 +181,7 @@ def _save_notes_unlocked(sid, data):
     path = sidecar_path(sid)
     path.parent.mkdir(parents=True, exist_ok=True)
     # Atomic write: a concurrent reader or writer never sees a torn file (the race that
-    # corrupted 20260304's key mid-write, TMAS-97). Write a sibling temp file, flush +
+    # corrupted 20260304's key mid-write, #4). Write a sibling temp file, flush +
     # fsync, then os.replace (atomic rename) into place — never a partial name-truth.json.
     fd, tmp = tempfile.mkstemp(dir=str(path.parent), prefix=".name-truth-", suffix=".tmp")
     try:
@@ -199,7 +199,7 @@ def _save_notes_unlocked(sid, data):
 
 
 def update_notes(sid, mutate):
-    """Serialized, atomic read-modify-write of the key (TMAS-97). An flock on a
+    """Serialized, atomic read-modify-write of the key (#4). An flock on a
     per-session lock file makes concurrent per-edit saves (Flask threads, or a second
     process) take turns, and the private _save_notes_unlocked writes atomically — so racing saves can neither
     lose each other's updates nor tear the file (the load->modify->save race that
@@ -778,7 +778,7 @@ def serve(sid, port):
                 # wipes a sibling field (the count.py lesson).
                 data[key].setdefault(item_id, dict(default))[field] = body.get("value") or ""
 
-            update_notes(sid, mutate)  # locked + atomic (TMAS-97), same path as the API
+            update_notes(sid, mutate)  # locked + atomic (#4), same path as the API
             self._send(200, '{"ok":true}', "application/json")
 
         def log_message(self, *a):

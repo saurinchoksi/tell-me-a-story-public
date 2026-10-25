@@ -1,4 +1,4 @@
-"""Tests for GET/POST /api/sessions/:id/missed-speech/hearings (TMAS-75).
+"""Tests for GET/POST /api/sessions/:id/missed-speech/hearings.
 
 The hear-box sidecar: per-session ear verdicts on missed-speech candidates,
 keyed by candidate span. Human-authored data — the POST must write ONLY

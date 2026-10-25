@@ -1,5 +1,5 @@
 /**
- * MissedHearBox — the hear-box for missed-speech candidates (TMAS-75).
+ * MissedHearBox — the hear-box for missed-speech candidates.
  *
  * A missed candidate has NO transcript segment (that's its definition), so
  * the validator's segment-anchored notes can't hold an observation about

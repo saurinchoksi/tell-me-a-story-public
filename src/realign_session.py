@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Surgical, in-place word realignment for EXISTING sessions (TMAS-54).
+"""Surgical, in-place word realignment for EXISTING sessions.
 
 Applies forced-alignment realignment (src/realign.py) to a session's
 transcript-rich.json WITHOUT re-running the pipeline. A full --re-enrich is the

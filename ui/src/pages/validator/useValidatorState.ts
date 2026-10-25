@@ -22,7 +22,7 @@ export interface ValidatorState {
   playbackRate: number;
   filters: FilterState;
   duplicateIds: Set<SegmentId>;
-  /** Missed-speech candidates from the API (TMAS-48). null = loading or unavailable. */
+  /** Missed-speech candidates from the API. null = loading or unavailable. */
   missedSpeech: MissedSpeechCandidate[] | null;
   /** Why missed-speech is unavailable (e.g. no diarization.json) — shown on the button. */
   missedError: string | null;
@@ -31,7 +31,7 @@ export interface ValidatorState {
   /** Index of the last-visited missed-speech candidate (-1 = none yet). */
   missedCursor: number;
   /**
-   * Hear-box entries (TMAS-75): the ear's verdicts, keyed by candidate span.
+   * Hear-box entries: the ear's verdicts, keyed by candidate span.
    * null until the sidecar load succeeds — saves are full-array replacement,
    * so saving before load would clobber previously recorded hearings.
    */

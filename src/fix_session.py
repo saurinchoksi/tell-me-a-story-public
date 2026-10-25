@@ -21,7 +21,7 @@ import json
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]  # clone-is-the-instance (TMAS-73) — see init_session.py
+ROOT = Path(__file__).resolve().parents[1]  # clone-is-the-instance — see init_session.py
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
 
@@ -49,7 +49,7 @@ def fix_session(session_dir: Path, write: bool = False) -> dict:
     """Run every fixer that can run here; return {fixer: groups|None} (None = skipped).
     With write=True, each fixer that RAN writes its section of the shared queue; a
     skipped fixer leaves its prior groups alone but RECORDS the skip (with reason) in
-    the queue's `fixers` metadata — "never ran" must stay visible (TMAS-72)."""
+    the queue's `fixers` metadata — "never ran" must stay visible."""
     rich_path = session_dir / "transcript-rich.json"
     transcript = json.loads(rich_path.read_text())
     audio_path = next(iter(session_dir.glob("audio.*")), None)

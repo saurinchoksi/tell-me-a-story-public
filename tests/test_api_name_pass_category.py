@@ -3,7 +3,7 @@
 A `category` outside the vocabulary is the quietest way to corrupt the ruler: it is not
 blank, so score_transform's `unjudged` guard never fires — but it belongs to neither
 KINDS nor NEGATIVE_KINDS, so the decision silently vanishes from every per-kind table.
-Since TMAS-102 the machine DRAFTS post a category, so a single typo in a hand-written
+Now the machine DRAFTS post a category, so a single typo in a hand-written
 name-suggestions.json ("improvized", "canon") would reach name-truth.json unchallenged.
 
 Fail Loud (docs/principles.md): refuse it at the write path, both routes.

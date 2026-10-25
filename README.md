@@ -135,8 +135,8 @@ tell-me-a-story/
 
 ```bash
 # Clone and set up
-git clone https://github.com/saurinchoksi/tell-me-a-story.git
-cd tell-me-a-story
+git clone https://github.com/saurinchoksi/tell-me-a-story-public.git
+cd tell-me-a-story-public
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt

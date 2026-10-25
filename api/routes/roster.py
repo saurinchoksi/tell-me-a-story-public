@@ -1,4 +1,4 @@
-"""Roster + home-canon endpoints — the "who exists" page's add-only writes (TMAS-56/57).
+"""Roster + home-canon endpoints — the "who exists" page's add-only writes.
 
 The roster answers "which real people exist"; the home cast answers "which of OUR
 characters exist". Only explicit human gestures on the page write either (the Name

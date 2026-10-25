@@ -218,7 +218,7 @@
   color: var(--color-text);
 }
 
-/* --- what registration triggers (TMAS-72): quiet footnote panel --- */
+/* --- what registration triggers: quiet footnote panel --- */
 
 .roster-hint {
   margin-top: var(--space-6);

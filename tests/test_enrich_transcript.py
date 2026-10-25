@@ -182,7 +182,7 @@ def test_enrich_namefix_runs_in_shadow(tmp_path):
     assert "_original" not in result["segments"][0]["words"][1]
     assert counts["namefix_groups"] == 2
     assert (tmp_path / "pending-name-corrections.json").exists()
-    # TMAS-72: the familyfix skip is recorded WHERE THE REVIEW PAGE LOOKS, not just
+    # the familyfix skip is recorded WHERE THE REVIEW PAGE LOOKS, not just
     # in _processing — "never ran" must not read as "checked, nothing found"
     import json as _json
     queue = _json.loads((tmp_path / "pending-name-corrections.json").read_text())
@@ -240,7 +240,7 @@ def test_enrich_familyfix_runs_in_shadow(tmp_path):
 
 def test_enrich_familyfix_error_leaves_queue_trace(tmp_path):
     """A CRASHED familyfix run also leaves its trace in the queue metadata (reason
-    'error') — a crash must not read as 'never stamped' at /name-review (TMAS-72)."""
+    'error') — a crash must not read as 'never stamped' at /name-review."""
     import json as _json
     transcript = {"segments": [{
         "id": 0, "start": 0.0, "end": 2.0, "text": " saw Marda today",
@@ -305,8 +305,8 @@ def test_enrich_spellingfix_runs_in_shadow(tmp_path):
     g = queue["groups"][0]
     assert g["fixer"] == "spelling" and g["label"] == "inconsistent-spelling"
     assert g["heard_cleaned"] == "jameis" and g["canonical"] == "Jammus"
-    assert g["world"] == "Home"   # world-less clusters file under the home canon (TMAS-57)
-    # TMAS-72: the fixers that DIDN'T run (no audio here) left their trace too
+    assert g["world"] == "Home"   # world-less clusters file under the home canon
+    # the fixers that DIDN'T run (no audio here) left their trace too
     assert queue["fixers"]["namefix"]["status"] == "skipped"
     assert queue["fixers"]["namefix"]["reason"] == "no_audio_path"
     assert queue["fixers"]["family"]["status"] == "skipped"
@@ -378,7 +378,7 @@ def test_enrich_pass5_degrades_safely(tmp_path):
 
 
 def test_dictionary_rewrite_does_not_stale_saved_queue(tmp_path):
-    """TMAS-77 regression (reworked after review): Pass 5 (dictionary normalization)
+    """Staleness regression (reworked after review): Pass 5 (dictionary normalization)
     rewrites word tokens AFTER the fixers stamp the shared queue, so the stamp truthfully
     names the pre-dictionary words — and stays that way (nothing but the fixers writes
     the queue). The fix is at READ time: _is_stale recognizes the position-preserving

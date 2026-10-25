@@ -45,7 +45,7 @@ FIXER = "spelling"
 VERSION = "1.2.0"   # 1.1.0: defer-to-namefix — a cluster touching words namefix asks
                     # about is namefix's territory (the detector-era canon-dedup
                     # lesson, applied to the fixers; see run_spellingfix)
-                    # 1.2.0: home canon (TMAS-57) — the registered spelling outranks
+                    # 1.2.0: home canon — the registered spelling outranks
                     # the vote, and world-less clusters file under "Home"
 
 
@@ -178,7 +178,7 @@ def run_spellingfix(transcript: dict, story_worlds: dict | None = None,
     its more-frequent garble, and unifying an invented engine into the canon name it
     sounds like). Same lesson as the detector era's M9b-defers-to-M9c dedup.
 
-    Home canon (v1.2.0, TMAS-57 — defer-to-namefix stays senior to both effects):
+    Home canon (v1.2.0 — defer-to-namefix stays senior to both effects):
     a cluster containing a REGISTERED character's spelling proposes that spelling
     (method "home-canon" — the registry outranks the vote, and the registered form is
     never a deviant); and a cluster whose spots all sit outside recognized story worlds

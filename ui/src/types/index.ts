@@ -222,7 +222,7 @@ export interface ValidatorSegment {
 }
 
 /**
- * One missed-speech candidate span (TMAS-48): diarization heard a voice but
+ * One missed-speech candidate span: diarization heard a voice but
  * NO segment of any kind exists there — no transcribed line, not even an
  * [unintelligible] placeholder. Computed live by the API from the canonical
  * EMP gap detection (src/gaps.py); the validator only displays it.
@@ -253,7 +253,7 @@ export type HearingVerdict =
   | 'nothing';
 
 /**
- * One hear-box entry (TMAS-75): what the ear heard at a missed-speech
+ * One hear-box entry: what the ear heard at a missed-speech
  * candidate, keyed by the candidate's span (start/end) since no transcript
  * segment exists to anchor it. Persists to missed-speech-verdicts.json — a
  * human-authored sidecar, never a transcript.
@@ -496,7 +496,7 @@ export interface NameCorrectionOccurrence {
   segment_text?: string;
   word_offset?: number;
   word_len?: number;
-  /** TMAS-79: the opt-in dictionary pass (Pass 5) rewrote this spot in place AFTER the
+  /** the opt-in dictionary pass (Pass 5) rewrote this spot in place AFTER the
    *  fixer filed the question, so the highlighted sentence now shows the corrected
    *  surface, not the word as first heard. A GET-time, read-only annotation — the queue
    *  is never written. `now_reads` is the current display token at the spot. */
@@ -558,7 +558,7 @@ export interface NameCorrectionItem {
    *  calibration; never acted on by code. */
   n_heard_in_transcript?: number;
   n_suggested_in_transcript?: number;
-  /** TMAS-79: how many of this card's spots the dictionary has since rewritten in place
+  /** how many of this card's spots the dictionary has since rewritten in place
    *  — so a heard count of 0 isn't a bare contradiction of the card's own premise. */
   n_heard_dictionary_corrected?: number;
   sessions: NameCorrectionSessionEntry[];
@@ -590,7 +590,7 @@ export interface RuledVerdict {
   undoable: boolean;
 }
 
-/** Did family-name-fix run? (TMAS-72) — per session: ran ("checked"), recorded a skip
+/** Did family-name-fix run? — per session: ran ("checked"), recorded a skip
  *  or failed run with a reason ("skipped"), its record is for an older transcript
  *  ("stale"), or it was never stamped at all — no queue file or no family entry
  *  ("unknown"). "checked, none found" and "never ran" must be visibly different. */
@@ -629,7 +629,7 @@ export interface NameCorrectionsRollup {
   family_fixer: FamilyFixerStatus;
 }
 
-// --- Name pass (the by-ear gold-key builder, TMAS-97) ---
+// --- Name pass (the by-ear gold-key builder, #4) ---
 
 /** One occurrence of a name candidate in the transcript. `window` is the audio clip
  *  [start,end] for the Hear button; `m9_coded` marks a hand-coded M9 segment. */
@@ -676,7 +676,7 @@ export interface NamePassSuggestion {
   note: string;
   /** The draft's name-kind. Optional — older sidecars predate it. A draft that carries one
    *  lands its category when accepted, so an accepted draft is COUNTABLE: a key item with a
-   *  spelling but no category is `unjudged` and the scorer drops it (TMAS-102). Scaffolding
+   *  spelling but no category is `unjudged` and the scorer drops it. Scaffolding
    *  like the spelling, never the key — his ear still rules, and can change it. */
   category?: string;
 }
@@ -688,7 +688,7 @@ export interface NamePassSuggestion {
  *             dropped ("Krishna," -> Jai Sri Krishna). Not a name-fixer's job.
  *    'tail'   NO decision of its own — this word is part of the name that starts before it
  *             ("you" + "dished" + "there." = Yudhishthira). It joins that name's span, so
- *             the fixer only passes if the WHOLE span reads the name (TMAS-101).
+ *             the fixer only passes if the WHOLE span reads the name (#5).
  *    ''       unstamped — the scorer infers and prints the inference. */
 export interface NameTruthOccurrence {
   true_name: string;
@@ -730,7 +730,7 @@ export interface NameTruthFieldSave {
   value: string;
 }
 
-// --- Roster (who exists — the /roster page, TMAS-56) ---
+// --- Roster (who exists — the /roster page) ---
 
 export interface RosterPerson {
   id: string;
@@ -755,7 +755,7 @@ export interface Roster {
   aliases: RosterAlias[];
 }
 
-// --- Home canon (the family's own characters — TMAS-57) ---
+// --- Home canon (the family's own characters) ---
 
 export interface HomeCharacter {
   id: string;

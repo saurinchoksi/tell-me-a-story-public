@@ -35,7 +35,7 @@ def transcribe(audio_path: str, model: str = None) -> dict:
         kwargs["path_or_hf_repo"] = model
 
     result = mlx_whisper.transcribe(audio_path, **kwargs)
-    # Release MLX's cached GPU buffers after transcription (TMAS-94). Whisper runs on
+    # Release MLX's cached GPU buffers after transcription. Whisper runs on
     # MLX, a separate memory pool from the torch models — diarize.py frees those with
     # torch.mps.empty_cache(), but MLX has no equivalent anywhere else in the pipeline,
     # so the transcription's large intermediate buffers sit in MLX's cache (counted as

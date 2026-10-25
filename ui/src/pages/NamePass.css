@@ -1,4 +1,4 @@
-/* NamePassPage — full-width, desktop-only by-ear key builder (TMAS-97). */
+/* NamePassPage — full-width, desktop-only by-ear key builder (#4). */
 
 .np-page {
   --np-ink: var(--ink, #1a1d24);
@@ -95,12 +95,12 @@
 .np-cand.np-corrected { color: var(--np-done); font-weight: 600; text-decoration: underline solid var(--np-done); }
 .np-cand.np-tocheck { text-decoration: underline wavy var(--np-tocheck); font-weight: 600; }
 .np-cand.np-nota { color: var(--np-nota); text-decoration: none; }
-/* Ruled, but the bucket is still unset — so the scorer would DROP it (TMAS-102). Reads as
+/* Ruled, but the bucket is still unset — so the scorer would DROP it. Reads as
    ruled (green ink, his decision is there) and still flagged (the amber wavy warning), so a
    name that scores as nothing can never look finished. */
 .np-cand.np-nobucket { text-decoration: underline wavy var(--np-tocheck); }
 
-/* Several words joined into ONE name (scope 'tail', TMAS-101). Worth seeing: it is the one
+/* Several words joined into ONE name (scope 'tail', #5). Worth seeing: it is the one
    ruling the transcript's own text gives no hint of — "you dished there." looks like three
    ordinary words — so an accidental join would otherwise be invisible. The bracket says "this
    is a span, not a word". Amber when the head rules no name yet: the tail hangs off nothing,
@@ -147,7 +147,7 @@
 .np-truth:disabled { background: var(--np-bg); color: var(--np-nota); cursor: not-allowed; }
 
 /* Where a spelling on a not-a-name actually belongs. It used to be accepted here and thrown
-   away in silence, which cost him the "Jai Sri Krishna" blessing (TMAS-103). */
+   away in silence, which cost him the "Jai Sri Krishna" blessing. */
 .np-route {
   font-size: 0.78rem; line-height: 1.5; color: #4b5563;
   background: var(--np-bg); border: 1px dashed var(--np-line);

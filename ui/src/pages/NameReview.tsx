@@ -112,7 +112,7 @@ const SKIP_COPY: Record<string, string> = {
   error: 'the check failed partway',
 };
 
-/** The "did the family side run?" strip (TMAS-72). Before this, a fresh instance with
+/** The "did the family side run?" strip. Before this, a fresh instance with
  *  no roster looked pixel-identical to "family names checked, all clean" — the same
  *  hole class as the friend-name discovery gap. One line says checked / not run (and
  *  why) / stale / never stamped, plus how many family questions are open below. */
@@ -258,7 +258,7 @@ export default function NameReview() {
     }
   }
 
-  // Collapse-only cluster verdict (TMAS-81): one Yes/No covers every member spelling of
+  // Collapse-only cluster verdict: one Yes/No covers every member spelling of
   // an invented-name cluster. The backend already records ONE pick per cluster, so we
   // send the same verdict for each member's gid and the view-time fold hides the rest.
   // No per-spot exclusion here — a cluster decision is all-or-nothing (the split waits
@@ -525,7 +525,7 @@ export default function NameReview() {
     );
   }
 
-  // One collapsed card for an invented-name spelling cluster (TMAS-81). Its several
+  // One collapsed card for an invented-name spelling cluster. Its several
   // member spellings share ONE machine verdict, so they get ONE card with ONE Yes/No —
   // every member spelling listed so contamination (a different character or an ordinary
   // word swept in) is obvious at a glance, which is exactly when you say No.
@@ -639,7 +639,7 @@ export default function NameReview() {
     kind: 'live' | 'yes-fold' | 'no-fold' | 'spot-fold',
   ) {
     // Collapse invented-name spelling questions that share a cluster into ONE card
-    // (TMAS-81) — the machine records one verdict per cluster, so N per-spelling cards
+    // — the machine records one verdict per cluster, so N per-spelling cards
     // were a display lie. LIVE only: once folded, a cluster's members can split across
     // the yes/no fold sections with mixed reasons (a word-level yes/no pre-empts the
     // cluster pick — see _partition_rulings), and each folded member needs its own lift.

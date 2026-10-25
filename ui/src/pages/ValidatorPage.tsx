@@ -126,7 +126,7 @@ export default function ValidatorPage() {
       .catch(() => {}); // non-critical — dropdown just stays empty
   }, [dispatch]);
 
-  // Load missed-speech candidates (TMAS-48) — separate from the critical
+  // Load missed-speech candidates — separate from the critical
   // session load so a session without diarization still opens; the Missed
   // button then carries the error instead of silently showing zero.
   useEffect(() => {
@@ -161,7 +161,7 @@ export default function ValidatorPage() {
   const [hearingSave, setHearingSave] = useState<{ id: string; state: 'saved' | 'failed' } | null>(null);
   const hearingSaveState = hearingSave && hearingSave.id === id ? hearingSave.state : 'idle';
 
-  // Load the hear-box sidecar (TMAS-75). On failure hearings stay null and
+  // Load the hear-box sidecar. On failure hearings stay null and
   // the panel never renders (saves are full-array replacement, so allowing a
   // save before a successful load could clobber recorded hearings) — the
   // error is surfaced in the panel's place, not just the console.
@@ -287,7 +287,7 @@ export default function ValidatorPage() {
     [state.missedSpeech, state.missedCursor, dispatch],
   );
 
-  // Upsert the hear-box entry for the candidate under the stepper (TMAS-75).
+  // Upsert the hear-box entry for the candidate under the stepper.
   // Keyed by the candidate's span; writes the whole array to the sidecar,
   // same optimistic dispatch-then-POST shape as persistNotes below. A failed
   // POST leaves the edit in memory — any later successful save resends the
@@ -675,7 +675,7 @@ export default function ValidatorPage() {
         </div>
       </div>
 
-      {/* Hear-box (TMAS-75): appears with the stepper — a missed candidate has
+      {/* Hear-box: appears with the stepper — a missed candidate has
           no segment to anchor a note to, so the ear's observation lands here.
           key= remounts per candidate so the draft text seeds fresh. */}
       {state.showMissed && state.missedSpeech && state.missedCursor >= 0 && state.missedHearings !== null && (

@@ -1,4 +1,4 @@
-"""Tests for the /api/roster endpoints — the add-only roster page (TMAS-56)."""
+"""Tests for the /api/roster endpoints — the add-only roster page."""
 import json
 
 import pytest

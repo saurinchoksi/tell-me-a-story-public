@@ -1,7 +1,7 @@
 import type { MissedSpeechCandidate, MissedHearing } from '../types';
 
 /**
- * Find the hear-box entry recorded for a candidate (TMAS-75), or null.
+ * Find the hear-box entry recorded for a candidate, or null.
  *
  * The span IS the join key: candidates and hearings both originate from the
  * same gap computation, so equality holds bit-for-bit; the epsilon only

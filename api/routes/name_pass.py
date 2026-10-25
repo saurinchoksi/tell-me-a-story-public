@@ -1,4 +1,4 @@
-"""Name-pass endpoints — build a per-session gold name key by ear (TMAS-97 step 1).
+"""Name-pass endpoints — build a per-session gold name key by ear (#4 step 1).
 
 A thin Flask wrapper over the model-free recall engine in emp/src/name_truth.py:
 
@@ -69,7 +69,7 @@ def get_name_pass(session_id: str):
         # wiring keeps aligned with name_truth.ROOT (tests monkeypatch ROOT to tmp) — so
         # this is a missing engine input: the frozen M9a's roster fail-loud, whose message
         # names the roster and the fix. Surface it as the server-side gap it is; don't
-        # relabel it (TMAS-108).
+        # relabel it.
         return jsonify({"error": str(e)}), 500
 
     # Serialize into cards. NB: collect_flags returns Python sets (surface, detectors,
@@ -179,7 +179,7 @@ def save_name_truth(session_id: str):
         data[key].setdefault(item_id, dict(default))[field] = body.get("value") or ""
 
     # Locked, atomic read-modify-write — serialized so racing per-edit saves can't lose a
-    # sibling field or corrupt the key (TMAS-97; the 20260304 loss).
+    # sibling field or corrupt the key (#4; the 20260304 loss).
     name_truth.update_notes(session_id, mutate)
     return jsonify({"ok": True})
 
@@ -209,7 +209,7 @@ def commit_name_truth(session_id: str):
     # Values, not just field NAMES: a `category` outside the vocabulary is the quietest way
     # to corrupt the ruler. It is not blank, so the scorer's `unjudged` guard never fires —
     # but it belongs to neither KINDS nor NEGATIVE_KINDS, so the decision silently vanishes
-    # from every per-kind table. Drafts now post a category (TMAS-102), so one typo in a
+    # from every per-kind table. Drafts now post a category, so one typo in a
     # hand-written sidecar ("improvized", "canon") would reach the key. Refuse it here.
     valid_categories = {value for value, _label in name_truth.CATEGORIES}
     for cleaned, fields in items.items():
@@ -229,6 +229,6 @@ def commit_name_truth(session_id: str):
         if body.get("heard"):
             data["_heard_confirmed"] = datetime.now(timezone.utc).isoformat()
 
-    # Locked, atomic read-modify-write (TMAS-97) — never lose a sibling item to a race.
+    # Locked, atomic read-modify-write (#4) — never lose a sibling item to a race.
     name_truth.update_notes(session_id, mutate)
     return jsonify({"ok": True, "committed": len(items)})

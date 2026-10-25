@@ -12,7 +12,7 @@
   color: var(--color-text-muted);
 }
 
-/* the "did the family side run?" strip (TMAS-72) — green-ish when checked,
+/* the "did the family side run?" strip — green-ish when checked,
    amber when a recording was never checked (e.g. no roster yet) */
 .name-family-strip {
   font-size: 0.85rem;
@@ -182,7 +182,7 @@
   font-family: var(--font-mono);
 }
 
-/* TMAS-79: the dictionary rewrote this spot after the question was filed — a quiet,
+/* the dictionary rewrote this spot after the question was filed — a quiet,
    read-only note so the highlighted (corrected) sentence never silently contradicts
    the card's premise */
 .name-corrected-note {
@@ -317,7 +317,7 @@
   border-radius: 3px;
 }
 
-/* Collapsed spelling cluster (TMAS-81): one card for an invented-name group whose
+/* Collapsed spelling cluster: one card for an invented-name group whose
    several spellings the machine records as a single verdict. */
 .name-cluster-tag {
   font-family: var(--font-body);

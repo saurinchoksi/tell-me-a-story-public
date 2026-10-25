@@ -40,7 +40,7 @@ def process_inbox(target_file: str | None = None, run_detectors: bool = True,
     failed = []
     detector_failed = []
     family_not_run = []   # (session_id, reason) — the family side silently not running
-                          # is the discovery-gap hole; the summary says it loudly (TMAS-72)
+                          # is the discovery-gap hole; the summary says it loudly
 
     # Phase 1: init all sessions
     for audio_path in sorted(audio_files):
@@ -113,9 +113,9 @@ def process_inbox(target_file: str | None = None, run_detectors: bool = True,
             # usable. The judge falls back to code-only if mlx-vlm isn't installed; the
             # name auditor (also mlx-vlm) adds minutes + a second model load per session.
             # run_detectors=False skips the whole Monitor pass: it's deprioritized
-            # (TMAS-64), doesn't feed the fixer questions, and a bulk calibration load
+            # (#13), doesn't feed the fixer questions, and a bulk calibration load
             # drops it to save that second model load per session (load_oldest
-            # --skip-monitor, TMAS-80).
+            # --skip-monitor, #16).
             if run_detectors:
                 try:
                     from detectors import DETECTORS
@@ -131,15 +131,15 @@ def process_inbox(target_file: str | None = None, run_detectors: bool = True,
                     print(f"  ⚠ Detectors failed (transcript saved): {e}")
                     detector_failed.append((session_id, str(e)))
 
-            # Say what the fixer stage did AND didn't do (TMAS-72) — before this,
+            # Say what the fixer stage did AND didn't do — before this,
             # the fixers ran as ~30 anonymous re-listen progress bars with no ending.
             # Fenced like the detector pass: a reporting crash must not reclassify a
             # fully-saved session as a pipeline failure.
             try:
                 family_skip = _print_fixer_summary(result["transcript"]["_processing"])
-                # "deferred" is by-design (transcripts-first churn, TMAS-95), not a real
+                # "deferred" is by-design (transcripts-first churn, #26), not a real
                 # gap — keep it out of the loud "Family names NOT checked" summary so a
-                # genuine no_roster/error in the same batch still stands out (TMAS-72).
+                # genuine no_roster/error in the same batch still stands out.
                 if family_skip is not None and family_skip != "deferred":
                     family_not_run.append((session_id, family_skip))
             except Exception as e:
@@ -163,7 +163,7 @@ _FIXER_STAGES = [
 
 
 def _print_fixer_summary(processing):
-    """The fix_session-style ending, lifted here (TMAS-72): one line per shadow fixer —
+    """The fix_session-style ending, lifted here: one line per shadow fixer —
     ran (with question count), NOT RUN (with the reason), or FAILED. Returns the
     family-name-fix skip reason when it didn't run (None otherwise) so the run summary
     can say it loudly."""
@@ -229,13 +229,13 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--skip-monitor", action="store_true",
-        help="skip the deprioritized Monitor detector pass (TMAS-64/80) — saves a second "
+        help="skip the deprioritized Monitor detector pass (#13/#16) — saves a second "
              "model load per session; used by the finish-and-free churn (load_oldest.py)",
     )
     parser.add_argument(
         "--skip-name-fixers", action="store_true",
         help="defer the three name fixers (namefix/familyfix/spellingfix) — skips the "
-             "expensive per-name Whisper re-listens; the transcripts-first churn (TMAS-95) "
+             "expensive per-name Whisper re-listens; the transcripts-first churn (#26) "
              "sets this and generates the name questions later via fix_session.py",
     )
     args = parser.parse_args()

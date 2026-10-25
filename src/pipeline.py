@@ -35,7 +35,7 @@ logger = logging.getLogger(__name__)
 def _record_fixer_outcome(cache_dir, fixer: str, version: str, transcript: dict,
                           reason: str, entry: dict) -> None:
     """Leave a fixer's didn't-run trace — a skip or a failed run — in the session's
-    shared queue metadata, where /name-review looks (TMAS-72). Recording must never
+    shared queue metadata, where /name-review looks. Recording must never
     sink the pipeline, but a recording failure may not vanish into a log line either:
     it lands on the stage's processing entry as `queue_record_error`."""
     if cache_dir is None:
@@ -84,7 +84,7 @@ def enrich_transcript(
             familyfix, spellingfix) — each records a "skipped"/"deferred"
             processing entry instead of running. The transcripts-first churn
             (load_oldest --skip-name-fixers) sets this so the expensive per-name
-            re-listens defer to a later fix_session batch (TMAS-95). Default True.
+            re-listens defer to a later fix_session batch (#26). Default True.
 
     Returns:
         Tuple of (enriched_transcript, processing_entries, counts_dict).
@@ -382,7 +382,7 @@ def enrich_transcript(
             "timestamp": datetime.now(timezone.utc).isoformat(),
         }
         # Record the skip in the shared queue like namefix/familyfix do (above), so all
-        # three fixers stay in parity for /name-review + the TMAS-72 audit: a deferred
+        # three fixers stay in parity for /name-review + the didn't-run audit: a deferred
         # churn must show "spelling: deferred", not a missing key. _record_fixer_outcome
         # no-ops when cache_dir is None, so the no_cache_dir case is unchanged.
         try:
@@ -491,7 +491,7 @@ def compute_file_hash(file_path: str) -> str:
 
 
 def guard_re_enrich(session_dir: str, force: bool = False) -> None:
-    """Refuse a full --re-enrich on a coded session unless forced (TMAS-105).
+    """Refuse a full --re-enrich on a coded session unless forced.
 
     EMP axial codes (axial-labels.json) join to transcript segments by their
     `id` field; a full re-enrich rebuilds transcript-rich.json and can orphan
@@ -539,7 +539,7 @@ def save_computed(session_dir: str, transcript_raw: dict, transcript: dict, diar
 
 
 def realign_words(transcript: dict, audio_path: str, verbose: bool = True) -> tuple[dict, dict]:
-    """Forced-alignment word realignment — transcript repair, not enrichment (TMAS-54).
+    """Forced-alignment word realignment — transcript repair, not enrichment.
 
     Re-times each segment's words from its trusted `text`, fixing Whisper's
     segment-initial drift and rescuing the words `clean_transcript` pruned from

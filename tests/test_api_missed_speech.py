@@ -1,4 +1,4 @@
-"""Tests for GET /api/sessions/:id/missed-speech (TMAS-48).
+"""Tests for GET /api/sessions/:id/missed-speech.
 
 The endpoint serves the canonical missed-speech gap detection (src/gaps.py)
 live from transcript-rich.json + diarization.json. Read-only: computing a

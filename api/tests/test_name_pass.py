@@ -1,4 +1,4 @@
-"""Tests for the name-pass endpoints (TMAS-97 step 1).
+"""Tests for the name-pass endpoints (#4 step 1).
 
 The recall engine (emp/src/name_truth.py) roots every path at its own module-level
 ROOT, so we monkeypatch name_truth.ROOT to tmp_path. That isolates BOTH the session

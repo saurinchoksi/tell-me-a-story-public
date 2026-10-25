@@ -1,4 +1,4 @@
-"""Tests for home canon (src/home_canon.py) — the family's own characters (TMAS-57).
+"""Tests for home canon (src/home_canon.py) — the family's own characters.
 Fake names only, as everywhere."""
 import json
 

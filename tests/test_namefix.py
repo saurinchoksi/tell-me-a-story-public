@@ -364,7 +364,7 @@ def test_write_queue_reads_legacy_file_as_namefix(tmp_path):
 
 
 def test_write_skip_records_reason(tmp_path):
-    """A fixer that DIDN'T run leaves a trace (TMAS-72): its metadata entry says
+    """A fixer that DIDN'T run leaves a trace: its metadata entry says
     skipped + why, while another fixer's same-fingerprint groups and ran record
     stand untouched."""
     t = make_transcript()
@@ -442,7 +442,7 @@ def test_gate_bandos_decides_without_dictionary():
     assert d["action"] == "auto" and d["canonical"] == "Pandavas"
 
 
-# ------------------------------ home-canon stage 2 (TMAS-57) ------------------------------
+# ------------------------------ home-canon stage 2 ------------------------------
 # The home ear: on an unrecognized story, the registered home cast rides in Whisper's
 # ear instead of nothing. The home guard: a token spelled exactly as a registered home
 # character is never a candidate, in ANY world. Both shadow, both label-identical.
@@ -531,7 +531,7 @@ def test_home_guard_in_recognized_world(tmp_path):
 
 def test_config_fingerprint_tracks_home_registry(tmp_path):
     """Registering a character invalidates cached namefix decisions (the one-time cost
-    accepted on TMAS-57); an absent registry fingerprints stably."""
+    accepted with home canon); an absent registry fingerprints stably."""
     absent = tmp_path / "absent.json"
     fp_absent = namefix.config_fingerprint(absent)
     assert fp_absent == namefix.config_fingerprint(absent)
@@ -541,7 +541,7 @@ def test_config_fingerprint_tracks_home_registry(tmp_path):
 
 def test_build_home_prompt_shape():
     """No world clause (nothing to hallucinate around) — just the names in the ear.
-    TMAS-67: build_home_prompt now routes through the SHARED cast_listing helper (the
+    build_home_prompt now routes through the SHARED cast_listing helper (the
     validated groups-lead + rest shape), NOT a plain Oxford join. At <= GROUPS_LEAD names
     the shape is a plain comma join with no ', and' — the concrete change to the home ear."""
     p = namefix.build_home_prompt(["Khadija", "Marley", "Soro"])
@@ -558,14 +558,14 @@ def test_build_home_prompt_shape():
 
 
 def test_build_home_prompt_empty_cast_no_indexerror():
-    """The confirmed edge case (TMAS-67): a module-public build_home_prompt on an empty
+    """The confirmed edge case: a module-public build_home_prompt on an empty
     cast used to raise IndexError; through the shared helper it yields an empty listing
     gracefully, matching build_prompt's long-standing tolerance."""
     assert namefix.build_home_prompt([]) == "This is a bedtime story. Its characters include ."
 
 
 def _legacy_build_prompt(world, cast):
-    """The pre-TMAS-67 build_prompt, verbatim — the reference the shared-helper version
+    """The original build_prompt, verbatim — the reference the shared-helper version
     must stay byte-identical to for every input."""
     groups, rest = cast[:6], cast[6:20]
     return (f"This is a bedtime story about the {world}. Its characters include "
@@ -603,7 +603,7 @@ def test_build_prompt_exact_strings_pinned():
 
 def test_cast_listing_is_the_one_shared_shape():
     """Both prompt builders route through cast_listing, so their listing portions are
-    identical for the same cast — the whole point of TMAS-67's unification. cast_listing
+    identical for the same cast — the whole point of the unification. cast_listing
     also returns the capped primed set for the gate."""
     cast = ["Ash", "Bru", "Cle", "Dov", "Elm", "Fig", "Gwen", "Holt"]
     listing, primed = namefix.cast_listing(cast)
@@ -621,7 +621,7 @@ def test_cast_listing_is_the_one_shared_shape():
 
 
 def test_run_namefix_gate_vocabulary_capped_to_primed():
-    """TMAS-67: past PROMPT_CAP cast members, the gate's confirmation vocabulary (the
+    """ past PROMPT_CAP cast members, the gate's confirmation vocabulary (the
     cast_clean handed to each re-decode job) is EXACTLY the primed names — never a name
     that was never in Whisper's ear. The prompt is capped to the same set, so cap == gate.
     (The cast-member guard keeps the full cast; it is applied before the job is formed.)"""
